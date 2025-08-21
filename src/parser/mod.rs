@@ -7,12 +7,16 @@
 // - Marble DSL
 
 pub mod ast;
+pub mod incremental;
 pub mod lexer;
 pub mod parser;
+pub mod tree_sitter_simple;
 
 pub use ast::*;
+pub use incremental::*;
 pub use lexer::*;
 pub use parser::*;
+pub use tree_sitter_simple::*;
 
 /// Language types supported by the parser
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -46,7 +50,7 @@ impl Language {
             Language::MarbleClient => &[".client"],
         }
     }
-    
+
     /// Detect language from file extension
     pub fn from_extension(ext: &str) -> Option<Language> {
         match ext.to_lowercase().as_str() {

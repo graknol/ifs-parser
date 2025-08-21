@@ -108,6 +108,7 @@ module.exports = grammar({
 
     variable_declaration: $ => seq(
       $.identifier,
+      optional('CONSTANT'),
       $.type_name,
       optional(seq(':=', $._expression)),
       ';'
@@ -275,6 +276,7 @@ module.exports = grammar({
     _expression: $ => choice(
       $.binary_expression,
       $.unary_expression,
+      $.null_check_expression,
       $.function_call,
       $.qualified_identifier,
       $.string_literal,
@@ -285,9 +287,20 @@ module.exports = grammar({
 
     binary_expression: $ => prec.left(1, seq(
       $._expression,
-      choice('=', '!=', '<>', '<', '<=', '>', '>=', '+', '-', '*', '/', 'AND', 'OR', '||'),
+      choice(
+        '=', '!=', '<>', '<', '<=', '>', '>=', '+', '-', '*', '/', 
+        'AND', 'OR', '||'
+      ),
       $._expression
     )),
+
+    null_check_expression: $ => seq(
+      $._expression,
+      choice(
+        seq('IS', 'NULL'),
+        seq('IS', 'NOT', 'NULL')
+      )
+    ),
 
     unary_expression: $ => prec(2, seq(
       choice('NOT', '-', '+'),
@@ -323,17 +336,25 @@ module.exports = grammar({
     ),
 
     // === TYPE NAMES ===
-    type_name: $ => seq(
-      choice(
-        'VARCHAR2',
-        'NUMBER',
-        'DATE', 
-        'BOOLEAN',
-        'CLOB',
-        'BLOB',
-        $.identifier
+    type_name: $ => choice(
+      // Oracle %TYPE and %ROWTYPE references
+      seq(
+        $.qualified_identifier,
+        choice('%TYPE', '%ROWTYPE')
       ),
-      optional(seq('(', choice($.number, seq($.number, ',', $.number)), ')'))
+      // Standard type definitions
+      seq(
+        choice(
+          'VARCHAR2',
+          'NUMBER',
+          'DATE', 
+          'BOOLEAN',
+          'CLOB',
+          'BLOB',
+          $.identifier
+        ),
+        optional(seq('(', choice($.number, seq($.number, ',', $.number)), ')'))
+      )
     ),
 
     // === HELPER RULES ===
