@@ -1,0 +1,33 @@
+{
+  "name": "tree-sitter-plsql-ifs",
+  "version": "0.1.0",
+  "description": "Tree-sitter grammar for IFS Cloud PL/SQL variant",
+  "main": "bindings/node",
+  "keywords": [
+    "parser",
+    "lexer",
+    "tree-sitter",
+    "plsql",
+    "ifs",
+    "oracle"
+  ],
+  "author": "Sindre van der Linden",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.plsql.ifs",
+      "file-types": [
+        "plsql",
+        "pks",
+        "pkb"
+      ],
+      "injection-regex": "plsql-ifs"
+    }
+  ]
+}

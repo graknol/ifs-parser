@@ -150,6 +150,14 @@ benchmarks/results/
 test_data/local/
 fixtures/local/
 
+# Tree-sitter generated files
+grammars/*/src/parser.c
+grammars/*/src/tree_sitter/
+grammars/*/node_modules/
+grammars/*/binding.gyp
+grammars/*/bindings/
+grammars/*/node-types.json
+
 # Analysis
 analysis/**/*.entity
 analysis/**/*.views
