@@ -112,6 +112,7 @@ module.exports = grammar({
       $.package_declaration,
       $.package_body,
       $.sql_statement,
+      $.anonymous_block,
       $.ifs_annotation,
       $.ifs_overtake_directive,
       $.pragma_directive,
@@ -311,10 +312,12 @@ module.exports = grammar({
       $.while_loop_statement,
       $.for_loop_statement,
       $.return_statement,
+      $.raise_statement,
       $.sql_statement,
+      $.select_into_statement,
       $.call_statement,
       $.null_statement,
-      $.block_statement,
+      $.anonymous_block,
       $.case_statement
     ),
 
@@ -405,6 +408,12 @@ module.exports = grammar({
       ';'
     ),
 
+    raise_statement: $ => seq(
+      make_keyword('RAISE'),
+      optional($.qualified_identifier),
+      ';'
+    ),
+
     call_statement: $ => seq(
       $.qualified_identifier,
       optional(paren_list($._expression, false)),
@@ -416,14 +425,13 @@ module.exports = grammar({
       ';'
     ),
 
-    block_statement: $ => seq(
-      optional(seq($.identifier, ':')),
+    // Anonymous block (statement within procedures/functions)
+    anonymous_block: $ => seq(
       optional(seq(make_keyword('DECLARE'), repeat($._declaration))),
       make_keyword('BEGIN'),
       repeat($._statement),
       optional($.exception_section),
       make_keyword('END'),
-      optional($.identifier),
       ';'
     ),
 
@@ -471,6 +479,23 @@ module.exports = grammar({
       optional(seq(make_keyword('ORDER'), make_keyword('BY'), comma_list($.order_by_item))),
       optional(seq(make_keyword('FOR'), make_keyword('UPDATE')))
     )),
+
+    // PL/SQL SELECT INTO statement
+    select_into_statement: $ => seq(
+      make_keyword('SELECT'),
+      optional(make_keyword('DISTINCT')),
+      $.select_list,
+      make_keyword('INTO'),
+      comma_list($.qualified_identifier),
+      optional(seq(make_keyword('FROM'), $.table_expression)),
+      optional(seq(make_keyword('WHERE'), $._expression)),
+      optional($.start_with_clause),
+      optional($.connect_by_clause),
+      optional(seq(make_keyword('GROUP'), make_keyword('BY'), comma_list($._expression))),
+      optional(seq(make_keyword('HAVING'), $._expression)),
+      optional(seq(make_keyword('ORDER'), make_keyword('BY'), comma_list($.order_by_item))),
+      ';'
+    ),
 
     // Hierarchical query clauses
     start_with_clause: $ => seq(make_keyword('START'), make_keyword('WITH'), $._expression),
@@ -668,7 +693,11 @@ module.exports = grammar({
 
     function_call: $ => seq(
       $.qualified_identifier,
-      paren_list($._expression, false)
+      choice(
+        paren_list($._expression, false),
+        seq('(', '*', ')'), // For aggregate functions like COUNT(*)
+        seq('(', ')') // For parameter-less functions
+      )
     ),
 
     cursor_attribute: $ => seq(
@@ -782,7 +811,7 @@ module.exports = grammar({
     // Keywords for conflict resolution
     keyword: $ => keyword_list(
       'PROCEDURE', 'FUNCTION', 'IS', 'BEGIN', 'END', 'IF', 'THEN', 'ELSE', 'ELSIF',
-      'LOOP', 'WHILE', 'FOR', 'IN', 'RETURN', 'NULL', 'SELECT', 'FROM', 'WHERE',
+      'LOOP', 'WHILE', 'FOR', 'IN', 'RETURN', 'RAISE', 'NULL', 'SELECT', 'FROM', 'WHERE',
       'INSERT', 'UPDATE', 'DELETE', 'INTO', 'VALUES', 'SET', 'AND', 'OR', 'NOT',
       'TRUE', 'FALSE', 'CURSOR', 'EXCEPTION', 'TYPE', 'RECORD', 'TABLE', 'OF',
       'VARRAY', 'DEFAULT', 'GROUP', 'BY', 'HAVING', 'ORDER', 'ASC', 'DESC',
