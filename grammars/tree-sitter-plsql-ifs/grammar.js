@@ -220,7 +220,7 @@ module.exports = grammar({
     variable_declaration: $ => seq(
       $.identifier,
       $.data_type,
-      optional(seq(make_keyword('DEFAULT'), $._expression)),
+      optional(seq(':=', $._expression)),
       ';'
     ),
 
@@ -292,9 +292,9 @@ module.exports = grammar({
 
     // Data types
     data_type: $ => choice(
-      make_keyword('VARCHAR2'),
-      make_keyword('NUMBER'),
-      make_keyword('INTEGER'),
+      seq(make_keyword('VARCHAR2'), optional(wrapped_in_parenthesis($.number))),
+      seq(make_keyword('NUMBER'), optional(wrapped_in_parenthesis(comma_list($.number, false)))),
+      seq(make_keyword('INTEGER'), optional(wrapped_in_parenthesis($.number))),
       make_keyword('DATE'),
       make_keyword('BOOLEAN'),
       make_keyword('CLOB'),
@@ -683,7 +683,7 @@ module.exports = grammar({
       prec.left(3, seq($._expression, choice(make_keyword('IS'), seq(make_keyword('IS'), make_keyword('NOT'))), make_keyword('NULL'))),
       prec.left(3, seq($._expression, make_keyword('BETWEEN'), $._expression, make_keyword('AND'), $._expression)),
       prec.left(4, seq($._expression, choice('+', '-'), $._expression)),
-      prec.left(5, seq($._expression, choice('*', '/', make_keyword('MOD')), $._expression)),
+      prec.left(5, seq($._expression, choice('*', '/'), $._expression)),
       prec.left(6, seq($._expression, '||', $._expression)),
     ),
 
