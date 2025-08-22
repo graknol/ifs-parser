@@ -32,5 +32,6 @@
       ],
       "injection-regex": "plsql-ifs"
     }
-  ]
+  ],
+  "main": "bindings/node"
 }

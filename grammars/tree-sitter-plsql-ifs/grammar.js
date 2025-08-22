@@ -66,7 +66,6 @@ function join_type($) {
     seq(make_keyword('LEFT'), optional(make_keyword('OUTER')), make_keyword('JOIN')),
     seq(make_keyword('RIGHT'), optional(make_keyword('OUTER')), make_keyword('JOIN')),
     seq(make_keyword('FULL'), optional(make_keyword('OUTER')), make_keyword('JOIN')),
-    seq(make_keyword('CROSS'), make_keyword('JOIN')),
   );
 }
 
@@ -315,7 +314,8 @@ module.exports = grammar({
       $.sql_statement,
       $.call_statement,
       $.null_statement,
-      $.block_statement
+      $.block_statement,
+      $.case_statement
     ),
 
     assignment_statement: $ => seq(
@@ -683,28 +683,44 @@ module.exports = grammar({
     ),
 
     case_expression: $ => choice(
-      // Simple CASE
+      // Simple CASE expression (SQL) - ends with END CASE
       seq(
         make_keyword('CASE'),
         $._expression,
-        repeat1($.when_clause),
+        repeat1($.when_condition_clause),
         optional($.else_expression_clause),
-        make_keyword('END')
+        make_keyword('END'),
+        make_keyword('CASE')
       ),
-      // Searched CASE
+      // Searched CASE expression (SQL) - ends with END CASE
       seq(
         make_keyword('CASE'),
         repeat1($.when_condition_clause),
         optional($.else_expression_clause),
-        make_keyword('END')
+        make_keyword('END'),
+        make_keyword('CASE')
       )
     ),
 
-    when_clause: $ => seq(
-      make_keyword('WHEN'),
-      $._expression,
-      make_keyword('THEN'),
-      $._expression
+    // PL/SQL CASE statement - ends with just END
+    case_statement: $ => choice(
+      // Simple CASE statement (PL/SQL)
+      seq(
+        make_keyword('CASE'),
+        $._expression,
+        repeat1($.when_statement_clause),
+        optional($.else_statement_clause),
+        make_keyword('END'),
+        ';'
+      ),
+      // Searched CASE statement (PL/SQL)
+      seq(
+        make_keyword('CASE'),
+        repeat1($.when_statement_clause),
+        optional($.else_statement_clause),
+        make_keyword('END'),
+        ';'
+      )
     ),
 
     when_condition_clause: $ => seq(
@@ -719,6 +735,19 @@ module.exports = grammar({
       $._expression
     ),
 
+    // PL/SQL CASE statement clauses
+    when_statement_clause: $ => seq(
+      make_keyword('WHEN'),
+      $._expression,
+      make_keyword('THEN'),
+      repeat($._statement)
+    ),
+
+    else_statement_clause: $ => seq(
+      make_keyword('ELSE'),
+      repeat($._statement)
+    ),
+
     // Literals and identifiers
     literal: $ => choice(
       $.string_literal,
@@ -727,10 +756,8 @@ module.exports = grammar({
       make_keyword('NULL')
     ),
 
-    string_literal: $ => choice(
-      /'([^'\\]|\\.)*'/,
-      /"([^"\\]|\\.)*"/
-    ),
+    string_literal: $ =>
+      /'(?:''|[^'])*'/,
 
     number: $ => /\d+(\.\d+)?([eE][+-]?\d+)?/,
 
