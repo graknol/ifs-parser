@@ -2,7 +2,6 @@
   "name": "tree-sitter-plsql-ifs",
   "version": "0.1.0",
   "description": "Tree-sitter grammar for IFS Cloud PL/SQL variant",
-  "main": "bindings/node",
   "keywords": [
     "parser",
     "lexer",
@@ -13,10 +12,14 @@
   ],
   "author": "Sindre van der Linden",
   "license": "MIT",
-  "dependencies": {
-    "nan": "^2.17.0"
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "generate": "tree-sitter generate"
   },
   "devDependencies": {
+    "jest": "^30.0.5",
     "tree-sitter-cli": "^0.20.0"
   },
   "tree-sitter": [

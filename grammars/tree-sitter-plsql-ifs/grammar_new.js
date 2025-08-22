@@ -462,7 +462,8 @@ module.exports = grammar({
       make_keyword('SELECT'),
       optional(make_keyword('DISTINCT')),
       $.select_list,
-      optional(seq(make_keyword('FROM'), $.table_expression)),
+      make_keyword('FROM'),
+      $.table_expression,
       optional(seq(make_keyword('WHERE'), $._expression)),
       optional($.start_with_clause),
       optional($.connect_by_clause),
@@ -481,10 +482,7 @@ module.exports = grammar({
       $._expression
     ),
 
-    select_list: $ => choice(
-      '*',
-      comma_list($.select_item)
-    ),
+    select_list: $ => comma_list($.select_item),
 
     select_item: $ => seq(
       $._expression,
@@ -554,10 +552,10 @@ module.exports = grammar({
       )
     )),
 
-    apply_target: $ => prec(1, choice(
+    apply_target: $ => choice(
       $.table_reference,
       seq($.subquery, optional($.table_alias))
-    )),
+    ),
 
     order_by_item: $ => seq(
       $._expression,
