@@ -5,13 +5,76 @@
     "fields": {}
   },
   {
+    "type": "anonymous_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "declaration_section",
+          "named": true
+        },
+        {
+          "type": "exception_handler",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "loop_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "overtake_directive",
+          "named": true
+        },
+        {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
+          "type": "procedure_call",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "select_into_statement",
+          "named": true
+        },
+        {
+          "type": "sql_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "argument_list",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
         {
           "type": "binary_expression",
           "named": true
@@ -21,7 +84,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -37,7 +116,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -46,6 +137,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -60,6 +155,10 @@
       "required": true,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -68,11 +167,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -88,7 +199,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -97,6 +220,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -111,6 +238,10 @@
       "required": true,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -119,11 +250,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -139,7 +282,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -148,6 +303,93 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "between_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -162,6 +404,10 @@
       "required": true,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -170,7 +416,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -186,7 +448,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -195,6 +469,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -226,6 +504,146 @@
     "fields": {}
   },
   {
+    "type": "connect_by_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cte_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_list",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "select_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cte_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cte_definition",
+          "named": true
+        },
+        {
+          "type": "select_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cursor_attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "cursor_declaration",
     "named": true,
     "fields": {},
@@ -249,6 +667,21 @@
     }
   },
   {
+    "type": "date_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "declaration_section",
     "named": true,
     "fields": {},
@@ -262,6 +695,10 @@
         },
         {
           "type": "exception_declaration",
+          "named": true
+        },
+        {
+          "type": "pragma_directive",
           "named": true
         },
         {
@@ -284,6 +721,10 @@
       "required": true,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -292,7 +733,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -308,7 +765,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -321,6 +790,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -342,6 +815,61 @@
     }
   },
   {
+    "type": "exception_handler",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "loop_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "overtake_directive",
+          "named": true
+        },
+        {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
+          "type": "procedure_call",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "select_into_statement",
+          "named": true
+        },
+        {
+          "type": "sql_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "expression_list",
     "named": true,
     "fields": {},
@@ -349,6 +877,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
         {
           "type": "binary_expression",
           "named": true
@@ -358,7 +890,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -374,7 +922,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -383,6 +943,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -452,11 +1016,19 @@
           "named": true
         },
         {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
           "type": "procedure_call",
           "named": true
         },
         {
           "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "select_into_statement",
           "named": true
         },
         {
@@ -471,6 +1043,11 @@
     }
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {},
@@ -483,6 +1060,10 @@
           "named": true
         },
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -491,11 +1072,27 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -523,7 +1120,19 @@
           "named": true
         },
         {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
           "type": "procedure_call",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
           "named": true
         },
         {
@@ -532,6 +1141,14 @@
         },
         {
           "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "select_into_statement",
           "named": true
         },
         {
@@ -544,6 +1161,97 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "in_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "value_list",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -573,6 +1281,199 @@
     }
   },
   {
+    "type": "join_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "select_statement",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "table_alias",
+          "named": true
+        },
+        {
+          "type": "table_reference",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "layer_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "like_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "loop_statement",
     "named": true,
     "fields": {},
@@ -585,11 +1486,23 @@
           "named": true
         },
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
           "named": true
         },
         {
@@ -602,6 +1515,14 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -629,7 +1550,19 @@
           "named": true
         },
         {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
           "type": "procedure_call",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
           "named": true
         },
         {
@@ -638,6 +1571,14 @@
         },
         {
           "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "select_into_statement",
           "named": true
         },
         {
@@ -651,18 +1592,26 @@
         {
           "type": "unary_expression",
           "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
         }
       ]
     }
   },
   {
-    "type": "null_check_expression",
+    "type": "merge_statement",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
         {
           "type": "binary_expression",
           "named": true
@@ -672,7 +1621,31 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "merge_when_matched",
+          "named": true
+        },
+        {
+          "type": "merge_when_not_matched",
           "named": true
         },
         {
@@ -688,7 +1661,118 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "select_statement",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "table_alias",
+          "named": true
+        },
+        {
+          "type": "table_name",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "merge_when_matched",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment_list",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -697,6 +1781,184 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "merge_when_not_matched",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "column_list",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "value_list",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "null_check_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -716,6 +1978,10 @@
       "required": true,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -724,7 +1990,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -740,7 +2022,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -749,6 +2043,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -786,6 +2084,10 @@
       "required": true,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -794,11 +2096,27 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -818,7 +2136,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -831,6 +2161,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -865,6 +2199,10 @@
       "required": true,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -873,7 +2211,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -889,7 +2243,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -898,6 +2264,95 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pragma_argument",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pragma_argument_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pragma_argument",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pragma_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pragma_argument_list",
+          "named": true
+        },
+        {
+          "type": "pragma_restriction_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pragma_restriction",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "pragma_restriction_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pragma_restriction",
           "named": true
         }
       ]
@@ -932,6 +2387,10 @@
           "named": true
         },
         {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
           "type": "procedure_call",
           "named": true
         },
@@ -940,7 +2399,94 @@
           "named": true
         },
         {
+          "type": "select_into_statement",
+          "named": true
+        },
+        {
           "type": "sql_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "prior_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -1010,6 +2556,10 @@
           "named": true
         },
         {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
           "type": "procedure_call",
           "named": true
         },
@@ -1018,11 +2568,20 @@
           "named": true
         },
         {
+          "type": "select_into_statement",
+          "named": true
+        },
+        {
           "type": "sql_statement",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "pseudo_column",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "qualified_identifier",
@@ -1048,6 +2607,10 @@
       "required": false,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1056,7 +2619,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -1072,7 +2651,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -1081,6 +2672,25 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scalar_subquery",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "select_statement",
           "named": true
         }
       ]
@@ -1115,11 +2725,19 @@
           "named": true
         },
         {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
           "type": "procedure_call",
           "named": true
         },
         {
           "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "select_into_statement",
           "named": true
         },
         {
@@ -1158,11 +2776,19 @@
           "named": true
         },
         {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
           "type": "procedure_call",
           "named": true
         },
         {
           "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "select_into_statement",
           "named": true
         },
         {
@@ -1173,54 +2799,7 @@
     }
   },
   {
-    "type": "select_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "boolean_literal",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "null_check_expression",
-          "named": true
-        },
-        {
-          "type": "number",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "qualified_identifier",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "select_statement",
+    "type": "select_into_statement",
     "named": true,
     "fields": {},
     "children": {
@@ -1228,11 +2807,23 @@
       "required": true,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
           "named": true
         },
         {
@@ -1241,6 +2832,14 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -1260,7 +2859,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -1278,6 +2889,223 @@
         {
           "type": "unary_expression",
           "named": true
+        },
+        {
+          "type": "variable_list",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "select_item",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "select_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "select_item",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "select_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "connect_by_clause",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "expression_list",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "order_by_list",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "select_list",
+          "named": true
+        },
+        {
+          "type": "start_with_clause",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "table_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
         }
       ]
     }
@@ -1291,6 +3119,10 @@
       "required": false,
       "types": [
         {
+          "type": "anonymous_block",
+          "named": true
+        },
+        {
           "type": "cursor_declaration",
           "named": true
         },
@@ -1303,7 +3135,15 @@
           "named": true
         },
         {
+          "type": "layer_declaration",
+          "named": true
+        },
+        {
           "type": "procedure_declaration",
+          "named": true
+        },
+        {
+          "type": "sql_statement",
           "named": true
         },
         {
@@ -1326,6 +3166,10 @@
       "required": true,
       "types": [
         {
+          "type": "cte_statement",
+          "named": true
+        },
+        {
           "type": "delete_statement",
           "named": true
         },
@@ -1334,7 +3178,11 @@
           "named": true
         },
         {
-          "type": "select_statement",
+          "type": "merge_statement",
+          "named": true
+        },
+        {
+          "type": "top_level_select_statement",
           "named": true
         },
         {
@@ -1345,18 +3193,17 @@
     }
   },
   {
-    "type": "string_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "table_expression",
+    "type": "start_with_clause",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
         {
           "type": "binary_expression",
           "named": true
@@ -1366,7 +3213,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -1382,7 +3245,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -1390,11 +3265,50 @@
           "named": true
         },
         {
-          "type": "table_name",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "table_alias",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "join_clause",
+          "named": true
+        },
+        {
+          "type": "table_reference",
           "named": true
         }
       ]
@@ -1410,6 +3324,40 @@
       "types": [
         {
           "type": "qualified_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_reference",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "table_alias",
+          "named": true
+        },
+        {
+          "type": "table_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "top_level_select_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "select_statement",
           "named": true
         }
       ]
@@ -1470,6 +3418,10 @@
       "required": true,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1478,7 +3430,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -1494,7 +3462,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -1503,6 +3483,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -1521,6 +3505,10 @@
           "named": true
         },
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1529,7 +3517,23 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -1545,7 +3549,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -1558,6 +3574,93 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "value_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
           "named": true
         }
       ]
@@ -1572,6 +3675,10 @@
       "required": true,
       "types": [
         {
+          "type": "between_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1580,11 +3687,27 @@
           "named": true
         },
         {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
           "named": true
         },
         {
@@ -1600,7 +3723,19 @@
           "named": true
         },
         {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
           "named": true
         },
         {
@@ -1614,12 +3749,413 @@
         {
           "type": "unary_expression",
           "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "qualified_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_argument_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_attribute_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "xml_attribute",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_forest_item",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_forest_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "xml_forest_item",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_function",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "expression_list",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "like_expression",
+          "named": true
+        },
+        {
+          "type": "null_check_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "prior_expression",
+          "named": true
+        },
+        {
+          "type": "pseudo_column",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "scalar_subquery",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "xml_argument_list",
+          "named": true
+        },
+        {
+          "type": "xml_attribute_list",
+          "named": true
+        },
+        {
+          "type": "xml_forest_list",
+          "named": true
+        },
+        {
+          "type": "xml_function",
+          "named": true
         }
       ]
     }
   },
   {
     "type": "!=",
+    "named": false
+  },
+  {
+    "type": "\"",
     "named": false
   },
   {
@@ -1640,6 +4176,22 @@
   },
   {
     "type": "$SEARCH",
+    "named": false
+  },
+  {
+    "type": "%FOUND",
+    "named": false
+  },
+  {
+    "type": "%ISOPEN",
+    "named": false
+  },
+  {
+    "type": "%NOTFOUND",
+    "named": false
+  },
+  {
+    "type": "%ROWCOUNT",
     "named": false
   },
   {
@@ -1668,6 +4220,10 @@
   },
   {
     "type": "*",
+    "named": false
+  },
+  {
+    "type": "**",
     "named": false
   },
   {
@@ -1755,7 +4311,19 @@
     "named": false
   },
   {
+    "type": "APPLY",
+    "named": false
+  },
+  {
+    "type": "AS",
+    "named": false
+  },
+  {
     "type": "ASC",
+    "named": false
+  },
+  {
+    "type": "AUTONOMOUS_TRANSACTION",
     "named": false
   },
   {
@@ -1771,11 +4339,27 @@
     "named": false
   },
   {
+    "type": "CHAR",
+    "named": false
+  },
+  {
     "type": "CLOB",
     "named": false
   },
   {
+    "type": "CONNECT_BY_ISCYCLE",
+    "named": false
+  },
+  {
+    "type": "CONNECT_BY_ISLEAF",
+    "named": false
+  },
+  {
     "type": "CONSTANT",
+    "named": false
+  },
+  {
+    "type": "CROSS",
     "named": false
   },
   {
@@ -1784,6 +4368,10 @@
   },
   {
     "type": "DATE",
+    "named": false
+  },
+  {
+    "type": "DECLARE",
     "named": false
   },
   {
@@ -1800,6 +4388,10 @@
   },
   {
     "type": "DESC",
+    "named": false
+  },
+  {
+    "type": "DISTINCT",
     "named": false
   },
   {
@@ -1827,6 +4419,10 @@
     "named": false
   },
   {
+    "type": "EXCEPTION_INIT",
+    "named": false
+  },
+  {
     "type": "FALSE",
     "named": false
   },
@@ -1840,10 +4436,6 @@
   },
   {
     "type": "FULL",
-    "named": false
-  },
-  {
-    "type": "FULL JOIN",
     "named": false
   },
   {
@@ -1875,10 +4467,6 @@
     "named": false
   },
   {
-    "type": "INNER JOIN",
-    "named": false
-  },
-  {
     "type": "INSERT",
     "named": false
   },
@@ -1903,11 +4491,19 @@
     "named": false
   },
   {
-    "type": "LEFT JOIN",
+    "type": "LEVEL",
+    "named": false
+  },
+  {
+    "type": "LONG",
     "named": false
   },
   {
     "type": "LOOP",
+    "named": false
+  },
+  {
+    "type": "NCLOB",
     "named": false
   },
   {
@@ -1939,7 +4535,19 @@
     "named": false
   },
   {
+    "type": "OTHERS",
+    "named": false
+  },
+  {
     "type": "OUT",
+    "named": false
+  },
+  {
+    "type": "OUTER",
+    "named": false
+  },
+  {
+    "type": "PRAGMA",
     "named": false
   },
   {
@@ -1951,6 +4559,10 @@
     "named": false
   },
   {
+    "type": "RESTRICT_REFERENCES",
+    "named": false
+  },
+  {
     "type": "RETURN",
     "named": false
   },
@@ -1959,7 +4571,19 @@
     "named": false
   },
   {
-    "type": "RIGHT JOIN",
+    "type": "RNDS",
+    "named": false
+  },
+  {
+    "type": "RNPS",
+    "named": false
+  },
+  {
+    "type": "ROWID",
+    "named": false
+  },
+  {
+    "type": "ROWNUM",
     "named": false
   },
   {
@@ -1967,7 +4591,15 @@
     "named": false
   },
   {
+    "type": "SERIALLY_REUSABLE",
+    "named": false
+  },
+  {
     "type": "SET",
+    "named": false
+  },
+  {
+    "type": "SQL",
     "named": false
   },
   {
@@ -1983,7 +4615,23 @@
     "named": false
   },
   {
+    "type": "TIMESTAMP",
+    "named": false
+  },
+  {
+    "type": "TIMESTAMP WITH LOCAL TIME ZONE",
+    "named": false
+  },
+  {
+    "type": "TIMESTAMP WITH TIME ZONE",
+    "named": false
+  },
+  {
     "type": "TRUE",
+    "named": false
+  },
+  {
+    "type": "TRUST",
     "named": false
   },
   {
@@ -2007,6 +4655,10 @@
     "named": false
   },
   {
+    "type": "WHEN",
+    "named": false
+  },
+  {
     "type": "WHERE",
     "named": false
   },
@@ -2015,8 +4667,96 @@
     "named": false
   },
   {
-    "type": "identifier",
-    "named": true
+    "type": "WNDS",
+    "named": false
+  },
+  {
+    "type": "WNPS",
+    "named": false
+  },
+  {
+    "type": "XMLAGG",
+    "named": false
+  },
+  {
+    "type": "XMLATTRIBUTES",
+    "named": false
+  },
+  {
+    "type": "XMLCAST",
+    "named": false
+  },
+  {
+    "type": "XMLCDATA",
+    "named": false
+  },
+  {
+    "type": "XMLCOLATTVAL",
+    "named": false
+  },
+  {
+    "type": "XMLCOMMENT",
+    "named": false
+  },
+  {
+    "type": "XMLCONCAT",
+    "named": false
+  },
+  {
+    "type": "XMLDATA",
+    "named": false
+  },
+  {
+    "type": "XMLELEMENT",
+    "named": false
+  },
+  {
+    "type": "XMLEXISTS",
+    "named": false
+  },
+  {
+    "type": "XMLFOREST",
+    "named": false
+  },
+  {
+    "type": "XMLNAMESPACE",
+    "named": false
+  },
+  {
+    "type": "XMLPARSE",
+    "named": false
+  },
+  {
+    "type": "XMLPI",
+    "named": false
+  },
+  {
+    "type": "XMLQUERY",
+    "named": false
+  },
+  {
+    "type": "XMLROOT",
+    "named": false
+  },
+  {
+    "type": "XMLSCHEMA",
+    "named": false
+  },
+  {
+    "type": "XMLSERIALIZE",
+    "named": false
+  },
+  {
+    "type": "XMLTABLE",
+    "named": false
+  },
+  {
+    "type": "XMLTRANSFORM",
+    "named": false
+  },
+  {
+    "type": "layer",
+    "named": false
   },
   {
     "type": "number",

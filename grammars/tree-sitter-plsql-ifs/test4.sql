@@ -1,0 +1,2 @@
+-- Test 4: CROSS JOIN
+SELECT * FROM table1 CROSS JOIN table2;
