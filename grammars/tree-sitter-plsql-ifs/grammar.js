@@ -93,6 +93,8 @@ module.exports = grammar({
     [$.table_reference, $.table_expression],
     // Handle join clause precedence
     [$.join_clause],
+    // Handle BETWEEN operator conflicts with AND
+    [$.binary_expression],
   ],
 
   rules: {
@@ -228,7 +230,7 @@ module.exports = grammar({
       $.identifier,
       make_keyword('CONSTANT'),
       $.data_type,
-      make_keyword('DEFAULT'),
+      ':=',
       $._expression,
       ';'
     ),
@@ -299,7 +301,7 @@ module.exports = grammar({
       make_keyword('BOOLEAN'),
       make_keyword('CLOB'),
       make_keyword('BLOB'),
-      seq($.identifier, '%', make_keyword('TYPE')),
+      seq($.qualified_identifier, '%', make_keyword('TYPE')),
       seq($.qualified_identifier, '%', make_keyword('ROWTYPE')),
       $.qualified_identifier
     ),
@@ -470,7 +472,7 @@ module.exports = grammar({
       make_keyword('SELECT'),
       optional(make_keyword('DISTINCT')),
       $.select_list,
-      optional(seq(make_keyword('FROM'), $.table_expression)),
+      seq(make_keyword('FROM'), $.table_expression),
       optional(seq(make_keyword('WHERE'), $._expression)),
       optional($.start_with_clause),
       optional($.connect_by_clause),
@@ -487,7 +489,7 @@ module.exports = grammar({
       $.select_list,
       make_keyword('INTO'),
       comma_list($.qualified_identifier),
-      optional(seq(make_keyword('FROM'), $.table_expression)),
+      seq(make_keyword('FROM'), $.table_expression),
       optional(seq(make_keyword('WHERE'), $._expression)),
       optional($.start_with_clause),
       optional($.connect_by_clause),
@@ -675,15 +677,15 @@ module.exports = grammar({
 
     binary_expression: $ => choice(
       prec.left(1, seq($._expression, choice('OR', make_keyword('OR')), $._expression)),
-      prec.left(2, seq($._expression, choice('AND', make_keyword('AND')), $._expression)),
+      prec.right(2, seq($._expression, choice(make_keyword('BETWEEN'), seq(make_keyword('NOT'), make_keyword('BETWEEN'))), $._expression, make_keyword('AND'), $._expression)),
+      prec.left(2, seq($._expression, make_keyword('AND'), $._expression)),
       prec.left(3, seq($._expression, choice('=', '!=', '<>', '<', '<=', '>', '>='), $._expression)),
       prec.left(3, seq($._expression, make_keyword('LIKE'), $._expression, optional(seq(make_keyword('ESCAPE'), $._expression)))),
       prec.left(3, seq($._expression, choice(make_keyword('IN'), seq(make_keyword('NOT'), make_keyword('IN'))),
         choice(paren_list($._expression), $.subquery))),
       prec.left(3, seq($._expression, choice(make_keyword('IS'), seq(make_keyword('IS'), make_keyword('NOT'))), make_keyword('NULL'))),
-      prec.left(3, seq($._expression, make_keyword('BETWEEN'), $._expression, make_keyword('AND'), $._expression)),
       prec.left(4, seq($._expression, choice('+', '-'), $._expression)),
-      prec.left(5, seq($._expression, choice('*', '/'), $._expression)),
+      prec.left(5, seq($._expression, choice('*', '/', '%'), $._expression)),
       prec.left(6, seq($._expression, '||', $._expression)),
     ),
 

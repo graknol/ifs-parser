@@ -577,10 +577,6 @@
       "required": false,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "number",
           "named": true
         },
@@ -3178,10 +3174,6 @@
   },
   {
     "type": "@UncheckedAccess",
-    "named": false
-  },
-  {
-    "type": "AND",
     "named": false
   },
   {

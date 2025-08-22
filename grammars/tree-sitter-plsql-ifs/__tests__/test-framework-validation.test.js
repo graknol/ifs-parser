@@ -37,7 +37,7 @@ describe('Test Framework Validation', () => {
     });
 
     test('Verify error reporting works', () => {
-      const result = tester.parseCode('SELECT FROM;'); // Missing column list
+      const result = tester.parseCode('SELECT FROM;'); // Missing FROM clause is invalid in Oracle
       expect(result.success).toBe(false);
       expect(result.errors.length).toBeGreaterThan(0);
       expect(result.output).toContain('ERROR');
