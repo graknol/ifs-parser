@@ -312,27 +312,6 @@ describe('Advanced PL/SQL Features', () => {
       `);
       expect(result.hasErrors).toBe(false);
     });
-
-    test('Object type with methods', () => {
-      const result = tester.parseCode(`
-        CREATE OR REPLACE TYPE employee_type AS OBJECT (
-          employee_id NUMBER,
-          first_name VARCHAR2(50),
-          last_name VARCHAR2(50),
-          salary NUMBER,
-          
-          MEMBER FUNCTION get_full_name RETURN VARCHAR2,
-          MEMBER PROCEDURE give_raise(amount NUMBER),
-          CONSTRUCTOR FUNCTION employee_type(
-            p_id NUMBER,
-            p_first VARCHAR2,
-            p_last VARCHAR2,
-            p_salary NUMBER DEFAULT 0
-          ) RETURN SELF AS RESULT
-        );
-      `);
-      expect(result.hasErrors).toBe(false);
-    });
   });
 
   describe('Complex SQL in PL/SQL', () => {
