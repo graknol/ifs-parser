@@ -91,11 +91,11 @@ describe('Test Framework Validation', () => {
   describe('Error Detection Validation', () => {
     test('Syntax errors are properly caught', () => {
       const invalidSqlTests = [
-        'SELECT',           // Incomplete
-        'FROM WHERE;',      // Wrong order
-        'SELECT * FRM;',    // Typo in keyword
-        'SELECT ((();',     // Unmatched parens
-        'SELECT "unclosed'  // Unclosed quote
+        'SELECT',                // Incomplete - missing FROM
+        'SELECT * FROM WHERE',   // Missing table name and semicolon  
+        'SELECT * FRM;',         // Typo in keyword
+        'SELECT ((();',          // Unmatched parens
+        'SELECT "unclosed'       // Unclosed quote
       ];
 
       invalidSqlTests.forEach(sql => {
