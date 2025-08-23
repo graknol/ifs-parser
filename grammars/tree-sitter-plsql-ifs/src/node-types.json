@@ -32,6 +32,10 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "cursor_declaration",
           "named": true
         },
@@ -48,6 +52,10 @@
           "named": true
         },
         {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
           "type": "fetch_cursor_statement",
           "named": true
         },
@@ -56,7 +64,19 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -69,6 +89,10 @@
         },
         {
           "type": "open_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "pragma_directive",
           "named": true
         },
         {
@@ -146,11 +170,11 @@
           "named": true
         },
         {
-          "type": "function_call",
+          "type": "extract_function",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "function_call",
           "named": true
         },
         {
@@ -190,6 +214,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -233,6 +261,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -284,6 +316,10 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -328,6 +364,10 @@
         },
         {
           "type": "else_expression_clause",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -379,6 +419,10 @@
         },
         {
           "type": "else_statement_clause",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -449,6 +493,25 @@
     "fields": {}
   },
   {
+    "type": "common_table_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "select_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "connect_by_clause",
     "named": true,
     "fields": {},
@@ -466,6 +529,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -513,6 +580,61 @@
         },
         {
           "type": "data_type",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "continue_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -589,6 +711,10 @@
       "required": true,
       "types": [
         {
+          "type": "function_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -636,6 +762,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -690,7 +820,15 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
           "named": true
         },
         {
@@ -702,7 +840,19 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -761,6 +911,10 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -812,7 +966,15 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
           "named": true
         },
         {
@@ -824,7 +986,19 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -899,11 +1073,23 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "cursor_attribute",
           "named": true
         },
         {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -915,11 +1101,23 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -1017,7 +1215,15 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
           "named": true
         },
         {
@@ -1029,11 +1235,23 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -1107,6 +1325,108 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exit_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "extract_function",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -1147,6 +1467,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -1201,11 +1525,19 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "cursor_for_loop_range",
           "named": true
         },
         {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
           "named": true
         },
         {
@@ -1217,11 +1549,23 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -1264,6 +1608,33 @@
     }
   },
   {
+    "type": "forall_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "numeric_for_loop_range",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "sql_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function_call",
     "named": true,
     "fields": {},
@@ -1284,11 +1655,19 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "over_clause",
           "named": true
         },
         {
@@ -1339,6 +1718,10 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "cursor_declaration",
           "named": true
         },
@@ -1359,6 +1742,10 @@
           "named": true
         },
         {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
           "type": "fetch_cursor_statement",
           "named": true
         },
@@ -1367,11 +1754,23 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -1388,6 +1787,10 @@
         },
         {
           "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "pragma_directive",
           "named": true
         },
         {
@@ -1416,6 +1819,21 @@
         },
         {
           "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "goto_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -1458,6 +1876,10 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "cursor_attribute",
           "named": true
         },
@@ -1474,6 +1896,14 @@
           "named": true
         },
         {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "fetch_cursor_statement",
           "named": true
         },
@@ -1482,11 +1912,23 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -1581,6 +2023,10 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -1636,6 +2082,10 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -1657,6 +2107,21 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "label_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -1729,7 +2194,15 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
           "named": true
         },
         {
@@ -1741,11 +2214,23 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -1804,7 +2289,15 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         },
         {
@@ -1860,6 +2353,10 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -1900,6 +2397,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -1950,11 +2451,66 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "over_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "order_by_item",
           "named": true
         },
         {
@@ -1981,7 +2537,31 @@
       "required": true,
       "types": [
         {
+          "type": "anonymous_block",
+          "named": true
+        },
+        {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
           "type": "constant_declaration",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
           "named": true
         },
         {
@@ -1993,7 +2573,35 @@
           "named": true
         },
         {
+          "type": "exception_section",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
           "type": "function_declaration",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
           "named": true
         },
         {
@@ -2001,7 +2609,47 @@
           "named": true
         },
         {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "loop_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
           "type": "procedure_declaration",
+          "named": true
+        },
+        {
+          "type": "raise_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "select_into_statement",
+          "named": true
+        },
+        {
+          "type": "sql_statement",
           "named": true
         },
         {
@@ -2010,6 +2658,10 @@
         },
         {
           "type": "variable_declaration",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
           "named": true
         }
       ]
@@ -2041,6 +2693,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "pragma_directive",
           "named": true
         },
         {
@@ -2080,6 +2736,10 @@
         },
         {
           "type": "data_type",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -2133,15 +2793,43 @@
       "required": true,
       "types": [
         {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
-          "type": "number",
+          "type": "literal",
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -2180,6 +2868,10 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "cursor_declaration",
           "named": true
         },
@@ -2196,6 +2888,10 @@
           "named": true
         },
         {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
           "type": "fetch_cursor_statement",
           "named": true
         },
@@ -2204,11 +2900,23 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -2225,6 +2933,10 @@
         },
         {
           "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "pragma_directive",
           "named": true
         },
         {
@@ -2327,6 +3039,25 @@
     }
   },
   {
+    "type": "ref_cursor_type_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "data_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "return_statement",
     "named": true,
     "fields": {},
@@ -2344,6 +3075,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -2399,6 +3134,10 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -2433,6 +3172,10 @@
         {
           "type": "unary_expression",
           "named": true
+        },
+        {
+          "type": "with_clause",
+          "named": true
         }
       ]
     }
@@ -2459,6 +3202,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -2524,6 +3271,10 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -2557,6 +3308,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "with_clause",
           "named": true
         }
       ]
@@ -2688,6 +3443,10 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -2777,6 +3536,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -2891,6 +3654,10 @@
           "named": true
         },
         {
+          "type": "ref_cursor_type_declaration",
+          "named": true
+        },
+        {
           "type": "table_type_declaration",
           "named": true
         },
@@ -2919,6 +3686,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -2969,6 +3740,10 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -3013,6 +3788,10 @@
         },
         {
           "type": "data_type",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -3086,6 +3865,10 @@
           "named": true
         },
         {
+          "type": "extract_function",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -3141,6 +3924,10 @@
         },
         {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -3207,11 +3994,23 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "cursor_attribute",
           "named": true
         },
         {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -3223,11 +4022,23 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -3318,11 +4129,23 @@
           "named": true
         },
         {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "cursor_attribute",
           "named": true
         },
         {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "extract_function",
           "named": true
         },
         {
@@ -3334,7 +4157,15 @@
           "named": true
         },
         {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
           "named": true
         },
         {
@@ -3343,6 +4174,10 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
           "named": true
         },
         {
@@ -3391,6 +4226,21 @@
         },
         {
           "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "with_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "common_table_expression",
           "named": true
         }
       ]
@@ -3485,6 +4335,10 @@
     "named": false
   },
   {
+    "type": "<<",
+    "named": false
+  },
+  {
     "type": "<=",
     "named": false
   },
@@ -3502,6 +4356,10 @@
   },
   {
     "type": ">=",
+    "named": false
+  },
+  {
+    "type": ">>",
     "named": false
   },
   {

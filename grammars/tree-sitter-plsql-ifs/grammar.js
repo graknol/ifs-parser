@@ -87,6 +87,7 @@ module.exports = grammar({
   ],
 
   conflicts: $ => [
+    [$.forall_statement, $._expression]
   ],
 
   rules: {
@@ -132,7 +133,7 @@ module.exports = grammar({
     pragma_directive: $ => seq(
       make_keyword('PRAGMA'),
       $.identifier,
-      optional(paren_list(choice($.identifier, $.string_literal, $.number))),
+      optional(paren_list($._expression)),  // Just use expressions to avoid conflicts
       ';'
     ),
 
@@ -187,6 +188,11 @@ module.exports = grammar({
       make_keyword('IS'),
       repeat($._declaration),
       repeat(choice($.procedure_declaration, $.function_declaration)),
+      optional(seq(
+        make_keyword('BEGIN'),
+        repeat($._statement),
+        optional($.exception_section)
+      )),
       make_keyword('END'),
       optional($.identifier),
       ';'
@@ -209,6 +215,7 @@ module.exports = grammar({
       $.cursor_declaration,
       $.type_declaration,
       $.exception_declaration,
+      $.pragma_directive
     ),
 
     variable_declaration: $ => seq(
@@ -239,7 +246,8 @@ module.exports = grammar({
     type_declaration: $ => choice(
       $.record_type_declaration,
       $.table_type_declaration,
-      $.varray_type_declaration
+      $.varray_type_declaration,
+      $.ref_cursor_type_declaration
     ),
 
     record_type_declaration: $ => seq(
@@ -278,6 +286,16 @@ module.exports = grammar({
       ';'
     ),
 
+    ref_cursor_type_declaration: $ => seq(
+      make_keyword('TYPE'),
+      $.identifier,
+      make_keyword('IS'),
+      make_keyword('REF'),
+      make_keyword('CURSOR'),
+      optional(seq(make_keyword('RETURN'), $.data_type)), // For strongly typed cursors
+      ';'
+    ),
+
     exception_declaration: $ => seq(
       $.identifier,
       make_keyword('EXCEPTION'),
@@ -305,6 +323,7 @@ module.exports = grammar({
       $.loop_statement,
       $.while_loop_statement,
       $.for_loop_statement,
+      $.forall_statement,
       $.return_statement,
       $.raise_statement,
       $.sql_statement,
@@ -316,11 +335,18 @@ module.exports = grammar({
       $.execute_immediate_statement,
       $.open_cursor_statement,
       $.fetch_cursor_statement,
-      $.close_cursor_statement
+      $.close_cursor_statement,
+      $.exit_statement,
+      $.continue_statement,
+      $.label_statement,
+      $.goto_statement
     ),
 
     assignment_statement: $ => seq(
-      $.qualified_identifier,
+      choice(
+        $.qualified_identifier,
+        $.function_call  // This handles array element access like arr(index)
+      ),
       ':=',
       $._expression,
       ';'
@@ -391,6 +417,7 @@ module.exports = grammar({
 
     cursor_for_loop_range: $ => choice(
       $.identifier,
+      $.function_call,  // This handles cursor_name(params)
       wrapped_in_parenthesis($.select_statement)
     ),
 
@@ -398,6 +425,29 @@ module.exports = grammar({
       $._expression,
       '..',
       $._expression
+    ),
+
+    forall_statement: $ => seq(
+      make_keyword('FORALL'),
+      $.identifier,
+      make_keyword('IN'),
+      choice(
+        // Range like i IN 1..10
+        $.numeric_for_loop_range,
+        // Collection range like i IN arr.FIRST..arr.LAST
+        seq(
+          $.qualified_identifier,
+          '..',
+          $.qualified_identifier
+        ),
+        // Collection indices like i IN INDICES OF arr
+        seq(
+          make_keyword('INDICES'),
+          make_keyword('OF'),
+          $.qualified_identifier
+        )
+      ),
+      $.sql_statement
     ),
 
     return_statement: $ => seq(
@@ -465,6 +515,7 @@ module.exports = grammar({
     ),
 
     select_statement: $ => prec.right(seq(
+      optional($.with_clause),
       make_keyword('SELECT'),
       optional(make_keyword('DISTINCT')),
       $.select_list,
@@ -474,24 +525,35 @@ module.exports = grammar({
       optional($.connect_by_clause),
       optional(seq(make_keyword('GROUP'), make_keyword('BY'), comma_list($._expression))),
       optional(seq(make_keyword('HAVING'), $._expression)),
-      optional(seq(make_keyword('ORDER'), make_keyword('BY'), comma_list($.order_by_item))),
+      optional(seq(make_keyword('ORDER'), optional(make_keyword('SIBLINGS')), make_keyword('BY'), comma_list($.order_by_item))),
       optional(seq(make_keyword('FOR'), make_keyword('UPDATE')))
     )),
 
     // PL/SQL SELECT INTO statement
     select_into_statement: $ => seq(
+      optional($.with_clause),
       make_keyword('SELECT'),
       optional(make_keyword('DISTINCT')),
       $.select_list,
-      make_keyword('INTO'),
-      comma_list($.qualified_identifier),
+      choice(
+        // Regular INTO
+        seq(make_keyword('INTO'), comma_list($.qualified_identifier)),
+        // BULK COLLECT INTO
+        seq(
+          make_keyword('BULK'),
+          make_keyword('COLLECT'),
+          make_keyword('INTO'),
+          comma_list($.qualified_identifier),
+          optional(seq(make_keyword('LIMIT'), $._expression))
+        )
+      ),
       seq(make_keyword('FROM'), $.table_expression),
       optional(seq(make_keyword('WHERE'), $._expression)),
       optional($.start_with_clause),
       optional($.connect_by_clause),
       optional(seq(make_keyword('GROUP'), make_keyword('BY'), comma_list($._expression))),
       optional(seq(make_keyword('HAVING'), $._expression)),
-      optional(seq(make_keyword('ORDER'), make_keyword('BY'), comma_list($.order_by_item))),
+      optional(seq(make_keyword('ORDER'), optional(make_keyword('SIBLINGS')), make_keyword('BY'), comma_list($.order_by_item))),
       ';'
     ),
 
@@ -501,7 +563,21 @@ module.exports = grammar({
     connect_by_clause: $ => seq(
       make_keyword('CONNECT'), make_keyword('BY'),
       optional(make_keyword('NOCYCLE')),
+      optional(make_keyword('PRIOR')),
       $._expression
+    ),
+
+    with_clause: $ => seq(
+      make_keyword('WITH'),
+      comma_list($.common_table_expression)
+    ),
+
+    common_table_expression: $ => seq(
+      $.identifier,
+      make_keyword('AS'),
+      '(',
+      $.select_statement,
+      ')'
     ),
 
     select_list: $ => choice(
@@ -609,7 +685,7 @@ module.exports = grammar({
     ),
 
     assignment_clause: $ => seq(
-      $.identifier,
+      $.qualified_identifier,
       '=',
       $._expression
     ),
@@ -626,8 +702,12 @@ module.exports = grammar({
       make_keyword('MERGE'),
       make_keyword('INTO'),
       $.qualified_identifier,
+      optional($.identifier), // table alias for target table
       make_keyword('USING'),
-      choice($.qualified_identifier, $.subquery),
+      choice(
+        seq($.qualified_identifier, optional($.identifier)), // table with optional alias
+        seq($.subquery, optional($.identifier)) // subquery with optional alias
+      ),
       make_keyword('ON'),
       $._expression,
       repeat1(choice($.when_matched_clause, $.when_not_matched_clause)),
@@ -663,6 +743,7 @@ module.exports = grammar({
       $.binary_expression,
       $.unary_expression,
       $.function_call,
+      $.extract_function,
       $.qualified_identifier,
       $.literal,
       $.cursor_attribute,
@@ -695,7 +776,32 @@ module.exports = grammar({
         paren_list($._expression, false),
         seq('(', '*', ')'), // For aggregate functions like COUNT(*)
         seq('(', ')') // For parameter-less functions
-      )
+      ),
+      optional($.over_clause) // Window function support
+    ),
+
+    extract_function: $ => seq(
+      make_keyword('EXTRACT'),
+      '(',
+      choice(
+        make_keyword('YEAR'),
+        make_keyword('MONTH'),
+        make_keyword('DAY'),
+        make_keyword('HOUR'),
+        make_keyword('MINUTE'),
+        make_keyword('SECOND')
+      ),
+      make_keyword('FROM'),
+      $._expression,
+      ')'
+    ),
+
+    over_clause: $ => seq(
+      make_keyword('OVER'),
+      '(',
+      optional(seq(make_keyword('PARTITION'), make_keyword('BY'), comma_list($._expression))),
+      optional(seq(make_keyword('ORDER'), make_keyword('BY'), comma_list($.order_by_item))),
+      ')'
     ),
 
     cursor_attribute: $ => seq(
@@ -840,6 +946,32 @@ module.exports = grammar({
     close_cursor_statement: $ => seq(
       make_keyword('CLOSE'),
       $.qualified_identifier,
+      ';'
+    ),
+
+    exit_statement: $ => seq(
+      make_keyword('EXIT'),
+      optional($.identifier), // loop label
+      optional(seq(make_keyword('WHEN'), $._expression)),
+      ';'
+    ),
+
+    continue_statement: $ => seq(
+      make_keyword('CONTINUE'),
+      optional($.identifier), // loop label
+      optional(seq(make_keyword('WHEN'), $._expression)),
+      ';'
+    ),
+
+    label_statement: $ => seq(
+      '<<',
+      $.identifier,
+      '>>'
+    ),
+
+    goto_statement: $ => seq(
+      make_keyword('GOTO'),
+      $.identifier,
       ';'
     ),
 
