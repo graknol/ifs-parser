@@ -14,9 +14,17 @@
           {
             "type": "SYMBOL",
             "name": "layer_declaration"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "statement_terminator"
           }
         ]
       }
+    },
+    "statement_terminator": {
+      "type": "STRING",
+      "value": "/"
     },
     "layer_declaration": {
       "type": "SEQ",
@@ -73,6 +81,10 @@
         {
           "type": "SYMBOL",
           "name": "pragma_directive"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "constant_declaration"
         }
       ]
     },
@@ -654,6 +666,14 @@
         {
           "type": "SYMBOL",
           "name": "pragma_directive"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "procedure_declaration"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_declaration"
         }
       ]
     },
@@ -5651,6 +5671,14 @@
     [
       "forall_statement",
       "_expression"
+    ],
+    [
+      "package_declaration",
+      "_declaration"
+    ],
+    [
+      "package_body",
+      "_declaration"
     ]
   ],
   "precedences": [],

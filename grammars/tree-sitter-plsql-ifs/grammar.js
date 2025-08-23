@@ -87,15 +87,21 @@ module.exports = grammar({
   ],
 
   conflicts: $ => [
-    [$.forall_statement, $._expression]
+    [$.forall_statement, $._expression],
+    [$.package_declaration, $._declaration],  // Resolve nested procedure conflict in packages
+    [$.package_body, $._declaration]          // Resolve nested procedure conflict in package bodies
   ],
 
   rules: {
     // Entry point - a PL/SQL file contains multiple items
     source_file: $ => repeat(choice(
       $._top_level_statement,
-      $.layer_declaration
+      $.layer_declaration,
+      $.statement_terminator
     )),
+
+    // Oracle PL/SQL statement terminator
+    statement_terminator: $ => '/',
 
     // Layer declaration for IFS files
     layer_declaration: $ => seq(make_keyword('layer'), $.identifier, ';'),
@@ -111,6 +117,7 @@ module.exports = grammar({
       $.ifs_annotation,
       $.ifs_overtake_directive,
       $.pragma_directive,
+      $.constant_declaration,
     ),
 
     // IFS Annotations
@@ -215,7 +222,9 @@ module.exports = grammar({
       $.cursor_declaration,
       $.type_declaration,
       $.exception_declaration,
-      $.pragma_directive
+      $.pragma_directive,
+      $.procedure_declaration,  // Nested procedures
+      $.function_declaration    // Nested functions
     ),
 
     variable_declaration: $ => seq(

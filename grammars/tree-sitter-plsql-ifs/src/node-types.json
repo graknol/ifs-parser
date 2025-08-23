@@ -68,6 +68,10 @@
           "named": true
         },
         {
+          "type": "function_declaration",
+          "named": true
+        },
+        {
           "type": "goto_statement",
           "named": true
         },
@@ -93,6 +97,10 @@
         },
         {
           "type": "pragma_directive",
+          "named": true
+        },
+        {
+          "type": "procedure_declaration",
           "named": true
         },
         {
@@ -1758,6 +1766,10 @@
           "named": true
         },
         {
+          "type": "function_declaration",
+          "named": true
+        },
+        {
           "type": "goto_statement",
           "named": true
         },
@@ -1791,6 +1803,10 @@
         },
         {
           "type": "pragma_directive",
+          "named": true
+        },
+        {
+          "type": "procedure_declaration",
           "named": true
         },
         {
@@ -2904,6 +2920,10 @@
           "named": true
         },
         {
+          "type": "function_declaration",
+          "named": true
+        },
+        {
           "type": "goto_statement",
           "named": true
         },
@@ -2937,6 +2957,10 @@
         },
         {
           "type": "pragma_directive",
+          "named": true
+        },
+        {
+          "type": "procedure_declaration",
           "named": true
         },
         {
@@ -3345,6 +3369,10 @@
           "named": true
         },
         {
+          "type": "constant_declaration",
+          "named": true
+        },
+        {
           "type": "function_declaration",
           "named": true
         },
@@ -3378,6 +3406,10 @@
         },
         {
           "type": "sql_statement",
+          "named": true
+        },
+        {
+          "type": "statement_terminator",
           "named": true
         }
       ]
@@ -3468,6 +3500,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "statement_terminator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "subquery",
