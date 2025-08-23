@@ -89,7 +89,10 @@ module.exports = grammar({
   conflicts: $ => [
     [$.forall_statement, $._expression],
     [$.package_declaration, $._declaration],  // Resolve nested procedure conflict in packages
-    [$.package_body, $._declaration]          // Resolve nested procedure conflict in package bodies
+    [$.package_body, $._declaration],          // Resolve nested procedure conflict in package bodies
+    [$.call_statement, $.argument_list],      // Resolve named parameter conflict
+    [$.pragma_directive, $.argument_list],    // Resolve pragma vs argument list conflict
+    [$._declaration, $._statement]            // Resolve conditional compilation conflict
   ],
 
   rules: {
@@ -108,25 +111,15 @@ module.exports = grammar({
 
     // Top-level statements
     _top_level_statement: $ => choice(
-      $.procedure_declaration,
-      $.function_declaration,
       $.package_declaration,
       $.package_body,
       $.sql_statement,
       $.anonymous_block,
-      $.ifs_annotation,
       $.ifs_overtake_directive,
-      $.pragma_directive,
-      $.constant_declaration,
+      $._declaration,  // This includes all types of declarations including procedures and functions
     ),
 
     // IFS Annotations
-    ifs_annotation: $ => choice(
-      '@Override',
-      '@Overtake',
-      '@UncheckedAccess'
-    ),
-
     // IFS Overtake directives
     ifs_overtake_directive: $ => choice(
       seq('$SEARCH', $.string_literal),
@@ -146,6 +139,7 @@ module.exports = grammar({
 
     // Procedure declaration
     procedure_declaration: $ => seq(
+      repeat($.annotation),  // Optional annotations before procedure
       make_keyword('PROCEDURE'),
       $.identifier,
       optional($.parameter_list),
@@ -161,6 +155,7 @@ module.exports = grammar({
 
     // Function declaration  
     function_declaration: $ => seq(
+      repeat($.annotation),  // Optional annotations before function
       make_keyword('FUNCTION'),
       $.identifier,
       optional($.parameter_list),
@@ -210,9 +205,19 @@ module.exports = grammar({
 
     parameter_declaration: $ => seq(
       $.identifier,
-      optional(choice(make_keyword('IN'), make_keyword('OUT'), seq(make_keyword('IN'), make_keyword('OUT')))),
+      optional(choice(
+        make_keyword('IN'),
+        make_keyword('OUT'),
+        seq(make_keyword('IN'), make_keyword('OUT')),
+        seq(make_keyword('IN'), make_keyword('OUT'), make_keyword('NOCOPY')),
+        seq(make_keyword('IN'), make_keyword('NOCOPY')),
+        seq(make_keyword('OUT'), make_keyword('NOCOPY'))
+      )),
       $.data_type,
-      optional(seq(make_keyword('DEFAULT'), $._expression))
+      optional(choice(
+        seq(make_keyword('DEFAULT'), $._expression),
+        seq(':=', $._expression)
+      ))
     ),
 
     // Declarations
@@ -224,7 +229,8 @@ module.exports = grammar({
       $.exception_declaration,
       $.pragma_directive,
       $.procedure_declaration,  // Nested procedures
-      $.function_declaration    // Nested functions
+      $.function_declaration,   // Nested functions
+      $.conditional_compilation_directive
     ),
 
     variable_declaration: $ => seq(
@@ -247,6 +253,7 @@ module.exports = grammar({
       make_keyword('CURSOR'),
       $.identifier,
       optional($.parameter_list),
+      optional(seq(make_keyword('RETURN'), $.data_type)),
       make_keyword('IS'),
       $.select_statement,
       ';'
@@ -270,7 +277,8 @@ module.exports = grammar({
 
     record_field: $ => seq(
       $.identifier,
-      $.data_type
+      $.data_type,
+      optional(seq(':=', $._expression))
     ),
 
     table_type_declaration: $ => seq(
@@ -348,11 +356,13 @@ module.exports = grammar({
       $.exit_statement,
       $.continue_statement,
       $.label_statement,
-      $.goto_statement
+      $.goto_statement,
+      $.conditional_compilation_directive
     ),
 
     assignment_statement: $ => seq(
       choice(
+        $.member_access,
         $.qualified_identifier,
         $.function_call  // This handles array element access like arr(index)
       ),
@@ -412,6 +422,7 @@ module.exports = grammar({
       make_keyword('FOR'),
       $.identifier,
       make_keyword('IN'),
+      optional(make_keyword('REVERSE')),
       choice(
         $.cursor_for_loop_range,
         $.numeric_for_loop_range
@@ -473,13 +484,26 @@ module.exports = grammar({
 
     call_statement: $ => seq(
       $.qualified_identifier,
-      optional(paren_list($._expression, false)),
+      optional($.argument_list),
       ';'
     ),
 
     null_statement: $ => seq(
       make_keyword('NULL'),
       ';'
+    ),
+
+    // Conditional Compilation Directives ($IF, $THEN, $ELSE, $END)
+    conditional_compilation_directive: $ => seq(
+      '$IF',
+      $._expression,
+      '$THEN',
+      repeat(choice($._statement, $._declaration)),
+      optional(seq(
+        '$ELSE',
+        repeat(choice($._statement, $._declaration))
+      )),
+      '$END'
     ),
 
     // Anonymous block (statement within procedures/functions)
@@ -529,13 +553,12 @@ module.exports = grammar({
       optional(make_keyword('DISTINCT')),
       $.select_list,
       seq(make_keyword('FROM'), $.table_expression),
-      optional(seq(make_keyword('WHERE'), $._expression)),
-      optional($.start_with_clause),
-      optional($.connect_by_clause),
+      optional($.where_clause),
+      optional($.hierarchical_clause),
       optional(seq(make_keyword('GROUP'), make_keyword('BY'), comma_list($._expression))),
       optional(seq(make_keyword('HAVING'), $._expression)),
       optional(seq(make_keyword('ORDER'), optional(make_keyword('SIBLINGS')), make_keyword('BY'), comma_list($.order_by_item))),
-      optional(seq(make_keyword('FOR'), make_keyword('UPDATE')))
+      optional($.for_update_clause)
     )),
 
     // PL/SQL SELECT INTO statement
@@ -557,13 +580,23 @@ module.exports = grammar({
         )
       ),
       seq(make_keyword('FROM'), $.table_expression),
-      optional(seq(make_keyword('WHERE'), $._expression)),
-      optional($.start_with_clause),
-      optional($.connect_by_clause),
+      optional($.where_clause),
+      optional($.hierarchical_clause),
       optional(seq(make_keyword('GROUP'), make_keyword('BY'), comma_list($._expression))),
       optional(seq(make_keyword('HAVING'), $._expression)),
       optional(seq(make_keyword('ORDER'), optional(make_keyword('SIBLINGS')), make_keyword('BY'), comma_list($.order_by_item))),
       ';'
+    ),
+
+    // FOR UPDATE clause for cursors and SELECT statements
+    for_update_clause: $ => seq(
+      make_keyword('FOR'),
+      make_keyword('UPDATE'),
+      optional(seq(make_keyword('OF'), comma_list($.qualified_identifier))),
+      optional(choice(
+        make_keyword('NOWAIT'),
+        seq(make_keyword('WAIT'), $._expression)
+      ))
     ),
 
     // Hierarchical query clauses
@@ -574,6 +607,14 @@ module.exports = grammar({
       optional(make_keyword('NOCYCLE')),
       optional(make_keyword('PRIOR')),
       $._expression
+    ),
+
+    // Hierarchical clause supports both orders: START WITH...CONNECT BY or CONNECT BY...START WITH
+    hierarchical_clause: $ => choice(
+      seq($.start_with_clause, $.connect_by_clause),
+      seq($.connect_by_clause, $.start_with_clause),
+      $.start_with_clause,
+      $.connect_by_clause
     ),
 
     with_clause: $ => seq(
@@ -689,7 +730,7 @@ module.exports = grammar({
       $.qualified_identifier,
       make_keyword('SET'),
       comma_list($.assignment_clause),
-      optional(seq(make_keyword('WHERE'), $._expression)),
+      optional($.where_clause),
       ';'
     ),
 
@@ -703,8 +744,24 @@ module.exports = grammar({
       make_keyword('DELETE'),
       make_keyword('FROM'),
       $.qualified_identifier,
-      optional(seq(make_keyword('WHERE'), $._expression)),
+      optional($.where_clause),
       ';'
+    ),
+
+    // WHERE clause that supports both regular expressions and CURRENT OF
+    where_clause: $ => seq(
+      make_keyword('WHERE'),
+      choice(
+        $._expression,
+        $.current_of_clause
+      )
+    ),
+
+    // CURRENT OF clause for positioned updates/deletes
+    current_of_clause: $ => seq(
+      make_keyword('CURRENT'),
+      make_keyword('OF'),
+      $.identifier
     ),
 
     merge_statement: $ => seq(
@@ -749,8 +806,10 @@ module.exports = grammar({
 
     // Expressions
     _expression: $ => choice(
+      $.member_access,
       $.binary_expression,
       $.unary_expression,
+      $.exists_expression,
       $.function_call,
       $.extract_function,
       $.qualified_identifier,
@@ -760,6 +819,15 @@ module.exports = grammar({
       $.subquery,
       wrapped_in_parenthesis($._expression)
     ),
+
+    member_access: $ => prec.left(10, seq(
+      choice(
+        $.function_call,
+        $.qualified_identifier,
+        wrapped_in_parenthesis($._expression)
+      ),
+      repeat1(seq('.', $.identifier))
+    )),
 
     binary_expression: $ => choice(
       prec.left(1, seq($._expression, choice('OR', make_keyword('OR')), $._expression)),
@@ -771,7 +839,7 @@ module.exports = grammar({
         choice(paren_list($._expression), $.subquery))),
       prec.left(3, seq($._expression, choice(make_keyword('IS'), seq(make_keyword('IS'), make_keyword('NOT'))), make_keyword('NULL'))),
       prec.left(4, seq($._expression, choice('+', '-'), $._expression)),
-      prec.left(5, seq($._expression, choice('*', '/', '%'), $._expression)),
+      prec.left(5, seq($._expression, choice('*', '/', '%', make_keyword('MOD')), $._expression)),
       prec.left(6, seq($._expression, '||', $._expression)),
     ),
 
@@ -782,11 +850,31 @@ module.exports = grammar({
     function_call: $ => seq(
       $.qualified_identifier,
       choice(
-        paren_list($._expression, false),
-        seq('(', '*', ')'), // For aggregate functions like COUNT(*)
-        seq('(', ')') // For parameter-less functions
+        $.argument_list,
+        seq('(', '*', ')') // For aggregate functions like COUNT(*)
       ),
       optional($.over_clause) // Window function support
+    ),
+
+    // EXISTS predicate for subqueries
+    exists_expression: $ => seq(
+      make_keyword('EXISTS'),
+      $.subquery
+    ),
+
+    // Support for both positional and named parameters, including empty parameter list
+    argument_list: $ => wrapped_in_parenthesis(
+      comma_list(choice(
+        $.named_argument,
+        $._expression  // Positional argument
+      ), false)
+    ),
+
+    // Named parameter: param_name => value
+    named_argument: $ => seq(
+      choice($.identifier, $.quoted_identifier),
+      '=>',
+      $._expression
     ),
 
     extract_function: $ => seq(
@@ -853,6 +941,7 @@ module.exports = grammar({
         repeat1($.when_statement_clause),
         optional($.else_statement_clause),
         make_keyword('END'),
+        make_keyword('CASE'),
         ';'
       ),
       // Searched CASE statement (PL/SQL)
@@ -861,6 +950,7 @@ module.exports = grammar({
         repeat1($.when_statement_clause),
         optional($.else_statement_clause),
         make_keyword('END'),
+        make_keyword('CASE'),
         ';'
       )
     ),
@@ -1008,6 +1098,15 @@ module.exports = grammar({
     )),
 
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9_$#]*/,
+
+    quoted_identifier: $ => /"[^"]+"/,
+
+    // Annotations (IFS-specific)
+    annotation: $ => seq(
+      '@',
+      $.identifier,
+      optional(repeat($.identifier))  // Optional parameters
+    ),
 
     // Comments
     comment: $ => choice(

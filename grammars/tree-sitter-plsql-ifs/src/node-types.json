@@ -1,5 +1,20 @@
 [
   {
+    "type": "annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "anonymous_block",
     "named": true,
     "fields": {},
@@ -25,6 +40,10 @@
         },
         {
           "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_compilation_directive",
           "named": true
         },
         {
@@ -158,6 +177,65 @@
     }
   },
   {
+    "type": "argument_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
+          "named": true
+        },
+        {
+          "type": "named_argument",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "assignment_clause",
     "named": true,
     "fields": {},
@@ -178,6 +256,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -187,6 +269,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -225,6 +311,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -234,6 +324,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -272,6 +366,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -281,6 +379,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -312,39 +414,11 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
-          "named": true
-        },
-        {
-          "type": "extract_function",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "literal",
+          "type": "argument_list",
           "named": true
         },
         {
           "type": "qualified_identifier",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
           "named": true
         }
       ]
@@ -375,6 +449,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -384,6 +462,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -430,6 +512,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -439,6 +525,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -520,6 +610,185 @@
     }
   },
   {
+    "type": "conditional_compilation_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anonymous_block",
+          "named": true
+        },
+        {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_compilation_directive",
+          "named": true
+        },
+        {
+          "type": "constant_declaration",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "cursor_declaration",
+          "named": true
+        },
+        {
+          "type": "exception_declaration",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "forall_statement",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "function_declaration",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "loop_statement",
+          "named": true
+        },
+        {
+          "type": "member_access",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "pragma_directive",
+          "named": true
+        },
+        {
+          "type": "procedure_declaration",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "raise_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "select_into_statement",
+          "named": true
+        },
+        {
+          "type": "sql_statement",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "type_declaration",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "variable_declaration",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "connect_by_clause",
     "named": true,
     "fields": {},
@@ -540,6 +809,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -549,6 +822,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -591,6 +868,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -604,6 +885,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -642,6 +927,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -658,6 +947,10 @@
           "named": true
         },
         {
+          "type": "member_access",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
           "named": true
         },
@@ -667,6 +960,21 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "current_of_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -695,6 +1003,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "data_type",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -761,39 +1073,11 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
-          "named": true
-        },
-        {
-          "type": "extract_function",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
           "type": "qualified_identifier",
           "named": true
         },
         {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
+          "type": "where_clause",
           "named": true
         }
       ]
@@ -825,6 +1109,10 @@
         },
         {
           "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_compilation_directive",
           "named": true
         },
         {
@@ -919,6 +1207,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -928,6 +1220,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -971,6 +1267,10 @@
         },
         {
           "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_compilation_directive",
           "named": true
         },
         {
@@ -1081,6 +1381,10 @@
           "named": true
         },
         {
+          "type": "conditional_compilation_directive",
+          "named": true
+        },
+        {
           "type": "continue_statement",
           "named": true
         },
@@ -1090,6 +1394,10 @@
         },
         {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exists_expression",
           "named": true
         },
         {
@@ -1134,6 +1442,10 @@
         },
         {
           "type": "loop_statement",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -1220,6 +1532,10 @@
         },
         {
           "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_compilation_directive",
           "named": true
         },
         {
@@ -1333,6 +1649,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -1345,6 +1665,10 @@
           "named": true
         },
         {
+          "type": "member_access",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
           "named": true
         },
@@ -1354,6 +1678,21 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exists_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "subquery",
           "named": true
         }
       ]
@@ -1380,6 +1719,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -1393,6 +1736,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -1431,6 +1778,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -1440,6 +1791,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -1478,6 +1833,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -1487,6 +1846,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -1530,6 +1893,10 @@
         },
         {
           "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_compilation_directive",
           "named": true
         },
         {
@@ -1616,6 +1983,61 @@
     }
   },
   {
+    "type": "for_update_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "forall_statement",
     "named": true,
     "fields": {},
@@ -1651,27 +2073,7 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
-          "named": true
-        },
-        {
-          "type": "extract_function",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "literal",
+          "type": "argument_list",
           "named": true
         },
         {
@@ -1680,14 +2082,6 @@
         },
         {
           "type": "qualified_identifier",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
           "named": true
         }
       ]
@@ -1701,6 +2095,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
         {
           "type": "anonymous_block",
           "named": true
@@ -1719,6 +2117,10 @@
         },
         {
           "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_compilation_directive",
           "named": true
         },
         {
@@ -1856,6 +2258,25 @@
     }
   },
   {
+    "type": "hierarchical_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "connect_by_clause",
+          "named": true
+        },
+        {
+          "type": "start_with_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {},
@@ -1892,6 +2313,10 @@
           "named": true
         },
         {
+          "type": "conditional_compilation_directive",
+          "named": true
+        },
+        {
           "type": "continue_statement",
           "named": true
         },
@@ -1909,6 +2334,10 @@
         },
         {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exists_expression",
           "named": true
         },
         {
@@ -1956,6 +2385,10 @@
           "named": true
         },
         {
+          "type": "member_access",
+          "named": true
+        },
+        {
           "type": "null_statement",
           "named": true
         },
@@ -1999,11 +2432,6 @@
     }
   },
   {
-    "type": "ifs_annotation",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "ifs_overtake_directive",
     "named": true,
     "fields": {},
@@ -2039,6 +2467,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -2052,6 +2484,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -2098,6 +2534,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -2107,6 +2547,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -2210,6 +2654,10 @@
           "named": true
         },
         {
+          "type": "conditional_compilation_directive",
+          "named": true
+        },
+        {
           "type": "continue_statement",
           "named": true
         },
@@ -2285,6 +2733,65 @@
     }
   },
   {
+    "type": "member_access",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "merge_statement",
     "named": true,
     "fields": {},
@@ -2305,6 +2812,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -2318,6 +2829,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -2338,6 +2853,69 @@
         },
         {
           "type": "when_not_matched_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "named_argument",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "quoted_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -2369,6 +2947,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -2378,6 +2960,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -2416,6 +3002,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -2425,6 +3015,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -2467,6 +3061,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -2476,6 +3074,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -2514,6 +3116,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -2523,6 +3129,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -2570,6 +3180,10 @@
         },
         {
           "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_compilation_directive",
           "named": true
         },
         {
@@ -2692,6 +3306,10 @@
       "required": true,
       "types": [
         {
+          "type": "conditional_compilation_directive",
+          "named": true
+        },
+        {
           "type": "constant_declaration",
           "named": true
         },
@@ -2755,6 +3373,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -2768,6 +3390,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -2821,6 +3447,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -2834,6 +3464,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -2860,6 +3494,10 @@
       "required": true,
       "types": [
         {
+          "type": "annotation",
+          "named": true
+        },
+        {
           "type": "anonymous_block",
           "named": true
         },
@@ -2877,6 +3515,10 @@
         },
         {
           "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_compilation_directive",
           "named": true
         },
         {
@@ -3033,11 +3675,55 @@
       "required": true,
       "types": [
         {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
           "type": "data_type",
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -3102,6 +3788,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -3111,6 +3801,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -3150,11 +3844,11 @@
           "named": true
         },
         {
-          "type": "connect_by_clause",
+          "type": "cursor_attribute",
           "named": true
         },
         {
-          "type": "cursor_attribute",
+          "type": "exists_expression",
           "named": true
         },
         {
@@ -3166,7 +3860,15 @@
           "named": true
         },
         {
+          "type": "hierarchical_clause",
+          "named": true
+        },
+        {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -3182,10 +3884,6 @@
           "named": true
         },
         {
-          "type": "start_with_clause",
-          "named": true
-        },
-        {
           "type": "subquery",
           "named": true
         },
@@ -3195,6 +3893,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "where_clause",
           "named": true
         },
         {
@@ -3229,6 +3931,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -3238,6 +3944,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -3287,11 +3997,11 @@
           "named": true
         },
         {
-          "type": "connect_by_clause",
+          "type": "cursor_attribute",
           "named": true
         },
         {
-          "type": "cursor_attribute",
+          "type": "exists_expression",
           "named": true
         },
         {
@@ -3299,11 +4009,23 @@
           "named": true
         },
         {
+          "type": "for_update_clause",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
         {
+          "type": "hierarchical_clause",
+          "named": true
+        },
+        {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -3319,10 +4041,6 @@
           "named": true
         },
         {
-          "type": "start_with_clause",
-          "named": true
-        },
-        {
           "type": "subquery",
           "named": true
         },
@@ -3332,6 +4050,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "where_clause",
           "named": true
         },
         {
@@ -3369,15 +4091,23 @@
           "named": true
         },
         {
+          "type": "conditional_compilation_directive",
+          "named": true
+        },
+        {
           "type": "constant_declaration",
           "named": true
         },
         {
-          "type": "function_declaration",
+          "type": "cursor_declaration",
           "named": true
         },
         {
-          "type": "ifs_annotation",
+          "type": "exception_declaration",
+          "named": true
+        },
+        {
+          "type": "function_declaration",
           "named": true
         },
         {
@@ -3410,6 +4140,14 @@
         },
         {
           "type": "statement_terminator",
+          "named": true
+        },
+        {
+          "type": "type_declaration",
+          "named": true
+        },
+        {
+          "type": "variable_declaration",
           "named": true
         }
       ]
@@ -3475,6 +4213,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -3484,6 +4226,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -3576,6 +4322,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -3585,6 +4335,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -3726,6 +4480,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -3735,6 +4493,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -3765,39 +4527,11 @@
           "named": true
         },
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
-          "named": true
-        },
-        {
-          "type": "extract_function",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
           "type": "qualified_identifier",
           "named": true
         },
         {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
+          "type": "where_clause",
           "named": true
         }
       ]
@@ -3828,6 +4562,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -3841,6 +4579,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -3902,6 +4644,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -3911,6 +4657,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -3964,6 +4714,10 @@
           "named": true
         },
         {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
           "type": "extract_function",
           "named": true
         },
@@ -3977,6 +4731,10 @@
         },
         {
           "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -4031,6 +4789,10 @@
           "named": true
         },
         {
+          "type": "conditional_compilation_directive",
+          "named": true
+        },
+        {
           "type": "continue_statement",
           "named": true
         },
@@ -4040,6 +4802,10 @@
         },
         {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exists_expression",
           "named": true
         },
         {
@@ -4087,6 +4853,10 @@
           "named": true
         },
         {
+          "type": "member_access",
+          "named": true
+        },
+        {
           "type": "null_statement",
           "named": true
         },
@@ -4130,6 +4900,65 @@
     }
   },
   {
+    "type": "where_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "current_of_clause",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "exists_expression",
+          "named": true
+        },
+        {
+          "type": "extract_function",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "member_access",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "while_loop_statement",
     "named": true,
     "fields": {},
@@ -4166,6 +4995,10 @@
           "named": true
         },
         {
+          "type": "conditional_compilation_directive",
+          "named": true
+        },
+        {
           "type": "continue_statement",
           "named": true
         },
@@ -4175,6 +5008,10 @@
         },
         {
           "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "exists_expression",
           "named": true
         },
         {
@@ -4223,6 +5060,10 @@
         },
         {
           "type": "loop_statement",
+          "named": true
+        },
+        {
+          "type": "member_access",
           "named": true
         },
         {
@@ -4292,7 +5133,15 @@
     "named": false
   },
   {
+    "type": "$ELSE",
+    "named": false
+  },
+  {
     "type": "$END",
+    "named": false
+  },
+  {
+    "type": "$IF",
     "named": false
   },
   {
@@ -4305,6 +5154,10 @@
   },
   {
     "type": "$SEARCH",
+    "named": false
+  },
+  {
+    "type": "$THEN",
     "named": false
   },
   {
@@ -4388,6 +5241,10 @@
     "named": false
   },
   {
+    "type": "=>",
+    "named": false
+  },
+  {
     "type": ">",
     "named": false
   },
@@ -4400,15 +5257,7 @@
     "named": false
   },
   {
-    "type": "@Override",
-    "named": false
-  },
-  {
-    "type": "@Overtake",
-    "named": false
-  },
-  {
-    "type": "@UncheckedAccess",
+    "type": "@",
     "named": false
   },
   {
@@ -4421,6 +5270,10 @@
   },
   {
     "type": "number",
+    "named": true
+  },
+  {
+    "type": "quoted_identifier",
     "named": true
   },
   {
