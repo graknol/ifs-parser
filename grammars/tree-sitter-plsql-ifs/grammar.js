@@ -79,22 +79,14 @@ function apply_type() {
 module.exports = grammar({
   name: 'plsql_ifs',
 
+  word: $ => $.identifier,
+
   extras: $ => [
     /\s+/,        // Whitespace
     $.comment,    // Comments can appear anywhere
   ],
 
   conflicts: $ => [
-    // Handle ambiguities between identifiers and keywords
-    [$.identifier, $.keyword],
-    // Handle ambiguity between different statement types
-    [$._top_level_statement, $._declaration],
-    // Handle table reference ambiguities
-    [$.table_reference, $.table_expression],
-    // Handle join clause precedence
-    [$.join_clause],
-    // Handle BETWEEN operator conflicts with AND
-    [$.binary_expression],
   ],
 
   rules: {
@@ -320,7 +312,11 @@ module.exports = grammar({
       $.call_statement,
       $.null_statement,
       $.anonymous_block,
-      $.case_statement
+      $.case_statement,
+      $.execute_immediate_statement,
+      $.open_cursor_statement,
+      $.fetch_cursor_statement,
+      $.close_cursor_statement
     ),
 
     assignment_statement: $ => seq(
@@ -677,8 +673,8 @@ module.exports = grammar({
 
     binary_expression: $ => choice(
       prec.left(1, seq($._expression, choice('OR', make_keyword('OR')), $._expression)),
-      prec.right(2, seq($._expression, choice(make_keyword('BETWEEN'), seq(make_keyword('NOT'), make_keyword('BETWEEN'))), $._expression, make_keyword('AND'), $._expression)),
       prec.left(2, seq($._expression, make_keyword('AND'), $._expression)),
+      prec.right(3, seq($._expression, choice(make_keyword('BETWEEN'), seq(make_keyword('NOT'), make_keyword('BETWEEN'))), $._expression, make_keyword('AND'), $._expression)),
       prec.left(3, seq($._expression, choice('=', '!=', '<>', '<', '<=', '>', '>='), $._expression)),
       prec.left(3, seq($._expression, make_keyword('LIKE'), $._expression, optional(seq(make_keyword('ESCAPE'), $._expression)))),
       prec.left(3, seq($._expression, choice(make_keyword('IN'), seq(make_keyword('NOT'), make_keyword('IN'))),
@@ -779,6 +775,74 @@ module.exports = grammar({
       repeat($._statement)
     ),
 
+    // EXECUTE IMMEDIATE statement for dynamic SQL
+    execute_immediate_statement: $ => seq(
+      make_keyword('EXECUTE'),
+      make_keyword('IMMEDIATE'),
+      $._expression, // SQL string
+      optional(seq(
+        optional(make_keyword('BULK')),
+        make_keyword('COLLECT'),
+        make_keyword('INTO'),
+        comma_list($.qualified_identifier),
+        optional(seq(make_keyword('LIMIT'), $._expression))
+      )),
+      optional(seq(
+        make_keyword('INTO'),
+        comma_list($.qualified_identifier)
+      )),
+      optional(seq(
+        make_keyword('USING'),
+        comma_list(seq(
+          optional(choice(make_keyword('IN'), make_keyword('OUT'), seq(make_keyword('IN'), make_keyword('OUT')))),
+          $._expression
+        ))
+      )),
+      optional(seq(
+        make_keyword('RETURNING'),
+        make_keyword('INTO'),
+        comma_list($.qualified_identifier)
+      )),
+      ';'
+    ),
+
+    // Cursor operations
+    open_cursor_statement: $ => seq(
+      make_keyword('OPEN'),
+      $.qualified_identifier,
+      choice(
+        // OPEN cursor_name(params)
+        optional(paren_list($._expression, false)),
+        // OPEN cursor_name FOR select_statement
+        seq(make_keyword('FOR'), $.select_statement),
+        // OPEN cursor_name FOR dynamic_sql_string USING params
+        seq(make_keyword('FOR'), $._expression, optional(seq(make_keyword('USING'), comma_list($._expression))))
+      ),
+      ';'
+    ),
+
+    fetch_cursor_statement: $ => seq(
+      make_keyword('FETCH'),
+      $.qualified_identifier,
+      choice(
+        seq(make_keyword('INTO'), comma_list($.qualified_identifier)),
+        seq(
+          optional(make_keyword('BULK')),
+          make_keyword('COLLECT'),
+          make_keyword('INTO'),
+          comma_list($.qualified_identifier),
+          optional(seq(make_keyword('LIMIT'), $._expression))
+        )
+      ),
+      ';'
+    ),
+
+    close_cursor_statement: $ => seq(
+      make_keyword('CLOSE'),
+      $.qualified_identifier,
+      ';'
+    ),
+
     // Literals and identifiers
     literal: $ => choice(
       $.string_literal,
@@ -808,18 +872,6 @@ module.exports = grammar({
     comment: $ => choice(
       seq('--', /.*/),
       seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/')
-    ),
-
-    // Keywords for conflict resolution
-    keyword: $ => keyword_list(
-      'PROCEDURE', 'FUNCTION', 'IS', 'BEGIN', 'END', 'IF', 'THEN', 'ELSE', 'ELSIF',
-      'LOOP', 'WHILE', 'FOR', 'IN', 'RETURN', 'RAISE', 'NULL', 'SELECT', 'FROM', 'WHERE',
-      'INSERT', 'UPDATE', 'DELETE', 'INTO', 'VALUES', 'SET', 'AND', 'OR', 'NOT',
-      'TRUE', 'FALSE', 'CURSOR', 'EXCEPTION', 'TYPE', 'RECORD', 'TABLE', 'OF',
-      'VARRAY', 'DEFAULT', 'GROUP', 'BY', 'HAVING', 'ORDER', 'ASC', 'DESC',
-      'INNER', 'LEFT', 'RIGHT', 'FULL', 'JOIN', 'ON', 'PRAGMA', 'OUTER', 'CROSS', 'APPLY',
-      'ROWNUM', 'ROWID', 'LEVEL', 'PRIOR', 'START', 'WITH', 'CONNECT', 'NOCYCLE',
-      'MERGE', 'USING', 'WHEN', 'MATCHED', 'THEN', 'COMMIT', 'ROLLBACK'
     ),
   }
 });

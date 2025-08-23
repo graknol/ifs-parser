@@ -24,6 +24,10 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
           "type": "constant_declaration",
           "named": true
         },
@@ -40,6 +44,14 @@
           "named": true
         },
         {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
+          "named": true
+        },
+        {
           "type": "for_loop_statement",
           "named": true
         },
@@ -53,6 +65,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -393,6 +409,21 @@
     }
   },
   {
+    "type": "close_cursor_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "qualified_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "column_alias",
     "named": true,
     "fields": {},
@@ -655,6 +686,18 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
+          "named": true
+        },
+        {
           "type": "for_loop_statement",
           "named": true
         },
@@ -668,6 +711,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -761,6 +808,18 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
+          "named": true
+        },
+        {
           "type": "for_loop_statement",
           "named": true
         },
@@ -774,6 +833,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -832,7 +895,19 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
           "named": true
         },
         {
@@ -857,6 +932,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -934,6 +1013,18 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
+          "named": true
+        },
+        {
           "type": "for_loop_statement",
           "named": true
         },
@@ -951,6 +1042,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -992,6 +1087,92 @@
     }
   },
   {
+    "type": "execute_immediate_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fetch_cursor_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "for_loop_statement",
     "named": true,
     "fields": {},
@@ -1016,7 +1197,19 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
           "type": "cursor_for_loop_range",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
           "named": true
         },
         {
@@ -1041,6 +1234,10 @@
         },
         {
           "type": "numeric_for_loop_range",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -1134,6 +1331,10 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
           "type": "constant_declaration",
           "named": true
         },
@@ -1154,6 +1355,14 @@
           "named": true
         },
         {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
+          "named": true
+        },
+        {
           "type": "for_loop_statement",
           "named": true
         },
@@ -1171,6 +1380,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -1241,6 +1454,10 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
           "type": "cursor_attribute",
           "named": true
         },
@@ -1250,6 +1467,14 @@
         },
         {
           "type": "elsif_clause",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
           "named": true
         },
         {
@@ -1274,6 +1499,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -1496,6 +1725,18 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
+          "named": true
+        },
+        {
           "type": "for_loop_statement",
           "named": true
         },
@@ -1513,6 +1754,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -1624,6 +1869,53 @@
         },
         {
           "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "open_cursor_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case_expression",
+          "named": true
+        },
+        {
+          "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "select_statement",
           "named": true
         },
         {
@@ -1880,6 +2172,10 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
           "type": "constant_declaration",
           "named": true
         },
@@ -1893,6 +2189,14 @@
         },
         {
           "type": "exception_section",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
           "named": true
         },
         {
@@ -1913,6 +2217,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -2895,7 +3203,19 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
           "named": true
         },
         {
@@ -2920,6 +3240,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
@@ -2990,7 +3314,19 @@
           "named": true
         },
         {
+          "type": "close_cursor_statement",
+          "named": true
+        },
+        {
           "type": "cursor_attribute",
+          "named": true
+        },
+        {
+          "type": "execute_immediate_statement",
+          "named": true
+        },
+        {
+          "type": "fetch_cursor_statement",
           "named": true
         },
         {
@@ -3019,6 +3355,10 @@
         },
         {
           "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "open_cursor_statement",
           "named": true
         },
         {
