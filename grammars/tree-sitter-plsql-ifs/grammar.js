@@ -146,7 +146,7 @@ module.exports = grammar({
       make_keyword('IS'),
       repeat($._declaration),
       make_keyword('BEGIN'),
-      repeat($._statement),
+      repeat($.annotated_statement),
       optional($.exception_section),
       make_keyword('END'),
       optional($.identifier),
@@ -164,7 +164,7 @@ module.exports = grammar({
       make_keyword('IS'),
       repeat($._declaration),
       make_keyword('BEGIN'),
-      repeat($._statement),
+      repeat($.annotated_statement),
       optional($.exception_section),
       make_keyword('END'),
       optional($.identifier),
@@ -360,6 +360,12 @@ module.exports = grammar({
       $.conditional_compilation_directive
     ),
 
+    // Annotated statement allows annotations before any statement
+    annotated_statement: $ => seq(
+      repeat($.annotation),
+      $._statement
+    ),
+
     assignment_statement: $ => seq(
       choice(
         $.member_access,
@@ -510,7 +516,7 @@ module.exports = grammar({
     anonymous_block: $ => seq(
       optional(seq(make_keyword('DECLARE'), repeat($._declaration))),
       make_keyword('BEGIN'),
-      repeat($._statement),
+      repeat($.annotated_statement),
       optional($.exception_section),
       make_keyword('END'),
       ';'
@@ -548,6 +554,25 @@ module.exports = grammar({
     ),
 
     select_statement: $ => prec.right(seq(
+      choice(
+        $.union_statement,
+        $.basic_select_statement
+      ),
+      optional(seq(make_keyword('ORDER'), optional(make_keyword('SIBLINGS')), make_keyword('BY'), comma_list($.order_by_item)))
+    )),
+
+    union_statement: $ => prec.left(seq(
+      $.basic_select_statement,
+      repeat1(seq(
+        choice(
+          make_keyword('UNION'),
+          seq(make_keyword('UNION'), make_keyword('ALL'))
+        ),
+        $.basic_select_statement
+      ))
+    )),
+
+    basic_select_statement: $ => seq(
       optional($.with_clause),
       make_keyword('SELECT'),
       optional(make_keyword('DISTINCT')),
@@ -557,9 +582,8 @@ module.exports = grammar({
       optional($.hierarchical_clause),
       optional(seq(make_keyword('GROUP'), make_keyword('BY'), comma_list($._expression))),
       optional(seq(make_keyword('HAVING'), $._expression)),
-      optional(seq(make_keyword('ORDER'), optional(make_keyword('SIBLINGS')), make_keyword('BY'), comma_list($.order_by_item))),
       optional($.for_update_clause)
-    )),
+    ),
 
     // PL/SQL SELECT INTO statement
     select_into_statement: $ => seq(
@@ -605,7 +629,6 @@ module.exports = grammar({
     connect_by_clause: $ => seq(
       make_keyword('CONNECT'), make_keyword('BY'),
       optional(make_keyword('NOCYCLE')),
-      optional(make_keyword('PRIOR')),
       $._expression
     ),
 
@@ -636,9 +659,14 @@ module.exports = grammar({
     ),
 
     select_item: $ => seq(
-      $._expression,
+      choice(
+        $._expression,
+        $.qualified_wildcard  // Support for table_alias.*
+      ),
       optional($.column_alias)
     ),
+
+    qualified_wildcard: $ => seq($.identifier, '.', '*'),
 
     column_alias: $ => choice(
       $.identifier,
@@ -810,6 +838,7 @@ module.exports = grammar({
       $.binary_expression,
       $.unary_expression,
       $.exists_expression,
+      $.prior_expression,
       $.function_call,
       $.extract_function,
       $.qualified_identifier,
@@ -834,7 +863,7 @@ module.exports = grammar({
       prec.left(2, seq($._expression, make_keyword('AND'), $._expression)),
       prec.right(3, seq($._expression, choice(make_keyword('BETWEEN'), seq(make_keyword('NOT'), make_keyword('BETWEEN'))), $._expression, make_keyword('AND'), $._expression)),
       prec.left(3, seq($._expression, choice('=', '!=', '<>', '<', '<=', '>', '>='), $._expression)),
-      prec.left(3, seq($._expression, make_keyword('LIKE'), $._expression, optional(seq(make_keyword('ESCAPE'), $._expression)))),
+      prec.left(3, seq($._expression, choice(make_keyword('LIKE'), seq(make_keyword('NOT'), make_keyword('LIKE'))), $._expression, optional(seq(make_keyword('ESCAPE'), $._expression)))),
       prec.left(3, seq($._expression, choice(make_keyword('IN'), seq(make_keyword('NOT'), make_keyword('IN'))),
         choice(paren_list($._expression), $.subquery))),
       prec.left(3, seq($._expression, choice(make_keyword('IS'), seq(make_keyword('IS'), make_keyword('NOT'))), make_keyword('NULL'))),
@@ -860,6 +889,12 @@ module.exports = grammar({
     exists_expression: $ => seq(
       make_keyword('EXISTS'),
       $.subquery
+    ),
+
+    // PRIOR expression for hierarchical queries
+    prior_expression: $ => seq(
+      make_keyword('PRIOR'),
+      $._expression
     ),
 
     // Support for both positional and named parameters, including empty parameter list
@@ -1102,11 +1137,11 @@ module.exports = grammar({
     quoted_identifier: $ => /"[^"]+"/,
 
     // Annotations (IFS-specific)
-    annotation: $ => seq(
+    annotation: $ => prec.right(seq(
       '@',
       $.identifier,
-      optional(repeat($.identifier))  // Optional parameters
-    ),
+      optional(seq('(', /[^)]*/, ')'))  // Optional parameters as raw text
+    )),
 
     // Comments
     comment: $ => choice(
