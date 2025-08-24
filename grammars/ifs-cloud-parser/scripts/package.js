@@ -284,7 +284,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ifs-cloud-parser"
-version = "0.1.0"
+version = "0.1.1"
 description = "A parser for IFS Cloud source code, made with tree-sitter. Tested on the entire 25.1.0 code-base with 100% success rate. Native support for SQL included."
 license = "MIT"
 authors = [{name = "Sindre van der Linden", email = "sindre@apply.no"}]
@@ -326,7 +326,7 @@ PYBIND11_MODULE(ifs_cloud_parser, m) {
     }, "Get the Tree-sitter Language object for IFS Cloud PL/SQL");
           
     // Add version info
-    m.attr("__version__") = "0.1.0";
+    m.attr("__version__") = "0.1.1";
 }
 `;
 
@@ -351,7 +351,7 @@ Usage:
 
 from .ifs_cloud_parser import language
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __all__ = ["language"]
 `;
 

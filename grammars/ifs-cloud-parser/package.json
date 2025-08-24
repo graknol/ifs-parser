@@ -1,6 +1,6 @@
 {
   "name": "ifs-cloud-parser",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tree-sitter grammar for IFS Cloud PL/SQL variant",
   "keywords": [
     "parser",
