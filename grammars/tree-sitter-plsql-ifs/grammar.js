@@ -654,7 +654,7 @@ module.exports = grammar({
     ),
 
     select_list: $ => choice(
-      '*',
+      $.asterisk,
       comma_list($.select_item)
     ),
 
@@ -666,7 +666,7 @@ module.exports = grammar({
       optional($.column_alias)
     ),
 
-    qualified_wildcard: $ => seq($.identifier, '.', '*'),
+    qualified_wildcard: $ => seq($.identifier, '.', $.asterisk),
 
     column_alias: $ => choice(
       $.identifier,
@@ -878,10 +878,7 @@ module.exports = grammar({
 
     function_call: $ => seq(
       $.qualified_identifier,
-      choice(
-        $.argument_list,
-        seq('(', '*', ')') // For aggregate functions like COUNT(*)
-      ),
+      $.argument_list,  // Simplified - argument_list now handles asterisk
       optional($.over_clause) // Window function support
     ),
 
@@ -897,12 +894,15 @@ module.exports = grammar({
       $._expression
     ),
 
-    // Support for both positional and named parameters, including empty parameter list
+    // Support for both positional and named parameters, including empty parameter list and asterisk
     argument_list: $ => wrapped_in_parenthesis(
-      comma_list(choice(
-        $.named_argument,
-        $._expression  // Positional argument
-      ), false)
+      choice(
+        $.asterisk,  // For COUNT(*), SUM(*), etc.
+        comma_list(choice(
+          $.named_argument,
+          $._expression  // Positional argument
+        ), false)
+      )
     ),
 
     // Named parameter: param_name => value
@@ -1135,6 +1135,10 @@ module.exports = grammar({
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9_$#]*/,
 
     quoted_identifier: $ => /"[^"]+"/,
+
+    // Asterisk as a special identifier - can be used in many contexts
+    // This simplifies rules for COUNT(*), table.*, SELECT *, etc.
+    asterisk: $ => '*',
 
     // Annotations (IFS-specific)
     annotation: $ => prec.right(seq(

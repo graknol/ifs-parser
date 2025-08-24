@@ -208,6 +208,10 @@
       "required": false,
       "types": [
         {
+          "type": "asterisk",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -379,6 +383,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "asterisk",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "basic_select_statement",
@@ -3769,9 +3778,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "asterisk",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -4119,8 +4132,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "asterisk",
+          "named": true
+        },
         {
           "type": "select_item",
           "named": true
