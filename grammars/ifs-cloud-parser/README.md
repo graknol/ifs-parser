@@ -55,12 +55,18 @@ pip install ifs_cloud_parser-0.1.0-py3-none-any.whl
 import ifs_cloud_parser
 from tree_sitter import Language, Parser
 
+# Create language and parser (tree-sitter 0.25+)
 language = Language(ifs_cloud_parser.language())
-parser = Parser()
-parser.set_language(language)
+parser = Parser(language)
 
-tree = parser.parse(b"PROCEDURE Test___ IS BEGIN NULL; END;")
+# Parse IFS Cloud PL/SQL code
+code = b"PROCEDURE Test___ IS BEGIN NULL; END;"
+tree = parser.parse(code)
+
+# Explore the syntax tree
 print(tree.root_node.sexp())
+print(f"Root node type: {tree.root_node.type}")
+print(f"Child count: {tree.root_node.child_count}")
 ```
 
 ## Features
