@@ -18,6 +18,7 @@ dist/
 *.egg-info
 *.whl
 **/__pycache__/
+build_env/
 
 # C artifacts
 *.a
