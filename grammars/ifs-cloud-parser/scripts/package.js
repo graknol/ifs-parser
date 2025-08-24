@@ -331,7 +331,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ifs-cloud-parser"
-version = "0.1.6"
+version = "0.2.0"
 description = "A parser for IFS Cloud source code, made with tree-sitter. Tested on the entire 25.1.0 code-base with 100% success rate. Native support for SQL included."
 license = "MIT"
 authors = [{name = "Sindre van der Linden", email = "sindre@apply.no"}]
@@ -411,7 +411,7 @@ Usage:
 
 from .ifs_cloud_parser import language
 
-__version__ = "0.1.5"
+__version__ = "0.2.0"
 __all__ = ["language"]
 `;
 
