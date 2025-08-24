@@ -55,7 +55,7 @@ pip install ifs_cloud_parser-0.1.0-py3-none-any.whl
 import ifs_cloud_parser
 from tree_sitter import Language, Parser
 
-# Create language and parser (tree-sitter 0.25+)
+# Create language and parser (tree-sitter 0.25.0)
 language = Language(ifs_cloud_parser.language())
 parser = Parser(language)
 

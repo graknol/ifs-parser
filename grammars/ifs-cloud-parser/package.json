@@ -1,7 +1,7 @@
 {
   "name": "ifs-cloud-parser",
-  "version": "0.1.4",
-  "description": "Tree-sitter grammar for IFS Cloud PL/SQL variant",
+  "version": "0.2.0",
+  "description": "A parser for IFS Cloud source code, made with tree-sitter. Tested on the entire 25.1.0 code-base with 100% success rate. Native support for SQL included.",
   "keywords": [
     "parser",
     "lexer",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "cross-env": "^10.0.0",
     "jest": "^30.0.5",
-    "tree-sitter-cli": "^0.25.8"
+    "tree-sitter-cli": "^0.25.0"
   },
   "tree-sitter": [
     {

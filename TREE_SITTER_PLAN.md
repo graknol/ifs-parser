@@ -9,7 +9,7 @@ This document outlines how to integrate tree-sitter parsers for IFS Cloud source
 ```javascript
 // grammar.js excerpt for IFS PL/SQL
 module.exports = grammar({
-  name: "plsql_ifs",
+  name: "ifs_cloud_parser",
 
   rules: {
     source_file: ($) => repeat($._statement),

@@ -331,7 +331,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ifs-cloud-parser"
-version = "0.1.4"
+version = "0.1.6"
 description = "A parser for IFS Cloud source code, made with tree-sitter. Tested on the entire 25.1.0 code-base with 100% success rate. Native support for SQL included."
 license = "MIT"
 authors = [{name = "Sindre van der Linden", email = "sindre@apply.no"}]
@@ -347,7 +347,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 requires-python = ">=3.8"
-dependencies = ["tree-sitter>=0.25.0"]
+dependencies = ["tree-sitter>=0.25.0,<0.26.0"]
 
 [project.urls]
 Homepage = "https://github.com/graknol/ifs-parser"
@@ -386,7 +386,7 @@ PYBIND11_MODULE(ifs_cloud_parser, m) {
     }, "Get the Tree-sitter Language object for IFS Cloud PL/SQL");
           
     // Add version info
-    m.attr("__version__") = "0.1.4";
+    m.attr("__version__") = "0.2.0";
 }
 `;
 
@@ -411,7 +411,7 @@ Usage:
 
 from .ifs_cloud_parser import language
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 __all__ = ["language"]
 `;
 
@@ -433,7 +433,7 @@ pip install .
 
 ## Usage
 
-### Basic Usage (tree-sitter 0.25+)
+### Basic Usage (tree-sitter 0.25.0)
 
 \`\`\`python
 import ifs_cloud_parser
@@ -495,13 +495,13 @@ walk_tree(tree.root_node)
 
 - ✅ **Complete IFS Cloud PL/SQL support** - Handles all variants and custom syntax
 - 🚀 **High performance** - Built with tree-sitter for speed
-- 🔧 **Latest tree-sitter** - Uses tree-sitter 0.25+ for best compatibility
+- 🔧 **Stable tree-sitter** - Uses tree-sitter 0.25.0 for maximum compatibility
 - 📱 **Cross-platform** - Works on Linux, macOS, and Windows
 - 🎯 **100% tested** - Validated against entire IFS Cloud codebase
 
 ## Requirements
 - Python 3.8+
-- tree-sitter >= 0.25.0
+- tree-sitter >= 0.25.0, < 0.26.0 (for maximum compatibility)
 - pybind11 (auto-installed)
 - C++ compiler
 

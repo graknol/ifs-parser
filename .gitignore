@@ -183,7 +183,6 @@ grammars/*/src/parser.c
 grammars/*/src/tree_sitter/
 grammars/*/node_modules/
 grammars/*/binding.gyp
-grammars/*/bindings/
 grammars/*/node-types.json
 
 # Analysis

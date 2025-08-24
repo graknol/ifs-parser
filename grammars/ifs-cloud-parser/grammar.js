@@ -90,8 +90,6 @@ module.exports = grammar({
     [$.forall_statement, $._expression],
     [$.package_declaration, $._declaration],  // Resolve nested procedure conflict in packages
     [$.package_body, $._declaration],          // Resolve nested procedure conflict in package bodies
-    [$.call_statement, $.argument_list],      // Resolve named parameter conflict
-    [$.pragma_directive, $.argument_list],    // Resolve pragma vs argument list conflict
     [$._declaration, $._statement]            // Resolve conditional compilation conflict
   ],
 
