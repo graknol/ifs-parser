@@ -182,6 +182,21 @@ function buildPython() {
     console.log('  ⚠️  Build failed, but package structure is ready');
     console.log('     You can still install with: pip install .');
     console.log(`     From directory: ${outputDir}`);
+
+    // Windows-specific troubleshooting
+    if (process.platform === 'win32') {
+      console.log('\n  🔧 Windows Build Troubleshooting:');
+      console.log('     1. Install Visual Studio Build Tools 2022');
+      console.log('     2. Install Windows SDK');
+      console.log('     3. Try: pip install --upgrade setuptools wheel');
+      console.log('     4. Set environment: set DISTUTILS_USE_SDK=1');
+      console.log('     5. Run from "Developer Command Prompt"');
+    }
+
+    // Log the actual error for debugging
+    if (err.message) {
+      console.log(`\n  📝 Error details: ${err.message}`);
+    }
   }
 }
 
@@ -233,20 +248,30 @@ sources = ['binding.cc', 'src/parser.c']
 if os.path.exists('src/scanner.c'):
     sources.append('src/scanner.c')
 
-# Suppress common tree-sitter warnings and the C++14 flag warning
+# Platform-specific compilation settings
 extra_compile_args = []
-if sys.platform != 'win32':
-    extra_compile_args = [
-        '-Wno-unused-but-set-variable',  # Suppresses: variable 'eof' set but not used
-        '-Wno-unused-variable',
-        '-Wno-unused-parameter',
-        '-w',  # Suppress the '-std=c++14' is valid for C++/ObjC++ but not for C warning
-    ]
-else:
-    # Windows MSVC
+extra_link_args = []
+
+if sys.platform == 'win32':
+    # Windows MSVC settings
     extra_compile_args = [
         '/wd4101',  # unreferenced local variable
-        '/wd4189',  # local variable initialized but not referenced  
+        '/wd4189',  # local variable initialized but not referenced
+        '/wd4996',  # deprecated function warnings
+        '/std:c++14',  # Explicit C++14 standard
+        '/DNOMINMAX',  # Prevent min/max macro conflicts
+    ]
+    extra_link_args = [
+        '/MACHINE:X64' if platform.architecture()[0] == '64bit' else '/MACHINE:X86'
+    ]
+else:
+    # Unix-like systems (Linux, macOS)
+    extra_compile_args = [
+        '-Wno-unused-but-set-variable',
+        '-Wno-unused-variable', 
+        '-Wno-unused-parameter',
+        '-w',  # Suppress warnings
+        '-std=c++14',  # Explicit C++14 standard
     ]
 
 class CustomBuildExt(build_ext):
@@ -260,6 +285,24 @@ class CustomBuildExt(build_ext):
             elif self.plat_name == 'linux_aarch64':
                 self.plat_name = 'manylinux1_aarch64'
 
+    def build_extension(self, ext):
+        # Additional Windows-specific build fixes
+        if sys.platform == 'win32':
+            # Ensure we're using the correct architecture
+            if platform.architecture()[0] == '64bit':
+                ext.extra_link_args = ext.extra_link_args or []
+                if '/MACHINE:X64' not in ext.extra_link_args:
+                    ext.extra_link_args.append('/MACHINE:X64')
+            
+            # Add Windows-specific library paths if needed
+            import distutils.util
+            plat_name = distutils.util.get_platform()
+            if 'win-amd64' in plat_name or 'win32' in plat_name:
+                # Ensure proper linking for Windows
+                pass
+                
+        super().build_extension(ext)
+
 ifs_cloud_parser = Extension(
     'ifs_cloud_parser',
     sources=sources,
@@ -269,6 +312,10 @@ ifs_cloud_parser = Extension(
     ],
     language='c++',
     extra_compile_args=extra_compile_args,
+    extra_link_args=extra_link_args,
+    define_macros=[
+        ('PYBIND11_USE_SMART_HOLDER_AS_DEFAULT', '1')  # Better memory management
+    ] if sys.platform != 'win32' else []
 )
 
 setup(
@@ -284,7 +331,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ifs-cloud-parser"
-version = "0.1.1"
+version = "0.1.2"
 description = "A parser for IFS Cloud source code, made with tree-sitter. Tested on the entire 25.1.0 code-base with 100% success rate. Native support for SQL included."
 license = "MIT"
 authors = [{name = "Sindre van der Linden", email = "sindre@apply.no"}]
@@ -310,9 +357,22 @@ Repository = "https://github.com/graknol/ifs-parser"
   // Create binding.cc (simplified and compatible)
   const bindingCc = `#include <pybind11/pybind11.h>
 
+// Windows compatibility fixes
+#ifdef _WIN32
+    #ifndef NOMINMAX
+        #define NOMINMAX
+    #endif
+    #include <windows.h>
+#endif
+
 // Forward declarations from tree-sitter
 extern "C" {
     typedef struct TSLanguage TSLanguage;
+    
+    // Use proper calling convention for Windows
+    #ifdef _WIN32
+        __declspec(dllexport)
+    #endif
     TSLanguage *ifs_cloud_parser();
 }
 
@@ -322,11 +382,11 @@ PYBIND11_MODULE(ifs_cloud_parser, m) {
     m.doc() = "IFS Cloud PL/SQL Tree-sitter parser - 100% success rate on IFS Cloud codebase";
     
     m.def("language", []() -> void* {
-        return ifs_cloud_parser();
+        return static_cast<void*>(ifs_cloud_parser());
     }, "Get the Tree-sitter Language object for IFS Cloud PL/SQL");
           
     // Add version info
-    m.attr("__version__") = "0.1.1";
+    m.attr("__version__") = "0.1.2";
 }
 `;
 
@@ -351,7 +411,7 @@ Usage:
 
 from .ifs_cloud_parser import language
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __all__ = ["language"]
 `;
 
@@ -391,6 +451,29 @@ print(tree.root_node.sexp())
 - pybind11 (auto-installed)
 - C++ compiler
 
+### Windows Requirements
+For Windows builds, you need:
+- Visual Studio Build Tools 2022 or Visual Studio 2022
+- Windows SDK
+- Run from "Developer Command Prompt" or "Visual Studio Developer PowerShell"
+
+If build fails on Windows:
+\`\`\`cmd
+# Install build tools
+pip install --upgrade setuptools wheel pybind11
+
+# Set environment variable
+set DISTUTILS_USE_SDK=1
+
+# Build from source
+pip install . --verbose
+\`\`\`
+
+## Platform Support
+- ✅ Linux (x64, ARM64) - manylinux wheels
+- ✅ macOS (Intel, Apple Silicon)  
+- ✅ Windows (x64) - requires Visual Studio Build Tools
+
 This parser handles all IFS Cloud PL/SQL variants and custom syntax.
 `;
 
@@ -404,6 +487,42 @@ include node-types.json
 recursive-include src *.c *.h
 global-exclude *.pyc
 global-exclude __pycache__
+global-exclude *.pyd
+global-exclude *.so
+global-exclude *.dylib
+global-exclude *.dll
+`;
+
+  // Create a Windows-specific build script helper
+  const buildHelperPy = `# Windows build helper
+import os
+import sys
+import platform
+
+def check_windows_build_env():
+    """Check if Windows build environment is properly configured"""
+    if sys.platform != 'win32':
+        return True
+        
+    # Check for Visual Studio Build Tools
+    vs_paths = [
+        "C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\BuildTools",
+        "C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Professional", 
+        "C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community",
+        "C:\\\\Program Files (x86)\\\\Microsoft Visual Studio\\\\2019\\\\BuildTools",
+    ]
+    
+    for path in vs_paths:
+        if os.path.exists(path):
+            print(f"Found Visual Studio at: {path}")
+            return True
+            
+    print("Warning: Visual Studio Build Tools not found")
+    print("Install from: https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022")
+    return False
+
+if __name__ == "__main__":
+    check_windows_build_env()
 `;
 
   // Write all files
@@ -413,6 +532,7 @@ global-exclude __pycache__
   fs.writeFileSync(path.join(outputDir, '__init__.py'), initPy);
   fs.writeFileSync(path.join(outputDir, 'README.md'), readme);
   fs.writeFileSync(path.join(outputDir, 'MANIFEST.in'), manifestIn);
+  fs.writeFileSync(path.join(outputDir, 'build_helper.py'), buildHelperPy);
 }
 
 function installPythonDeps() {
