@@ -840,12 +840,12 @@ module.exports = grammar({
       $.exists_expression,
       $.prior_expression,
       $.function_call,
-      $.extract_function,
       $.qualified_identifier,
       $.literal,
-      $.cursor_attribute,
       $.case_expression,
       $.subquery,
+      $.attribute_access,
+      $.extract_function,
       wrapped_in_parenthesis($._expression)
     ),
 
@@ -912,22 +912,6 @@ module.exports = grammar({
       $._expression
     ),
 
-    extract_function: $ => seq(
-      make_keyword('EXTRACT'),
-      '(',
-      choice(
-        make_keyword('YEAR'),
-        make_keyword('MONTH'),
-        make_keyword('DAY'),
-        make_keyword('HOUR'),
-        make_keyword('MINUTE'),
-        make_keyword('SECOND')
-      ),
-      make_keyword('FROM'),
-      $._expression,
-      ')'
-    ),
-
     over_clause: $ => seq(
       make_keyword('OVER'),
       '(',
@@ -936,15 +920,21 @@ module.exports = grammar({
       ')'
     ),
 
-    cursor_attribute: $ => seq(
-      $.identifier,
+    // Generalized attribute access (handles %TYPE, %ROWTYPE, %FOUND, etc.)
+    attribute_access: $ => prec(8, seq(
+      $.qualified_identifier,
       '%',
-      choice(
-        make_keyword('FOUND'),
-        make_keyword('NOTFOUND'),
-        make_keyword('ISOPEN'),
-        make_keyword('ROWCOUNT')
-      )
+      $.identifier  // Any attribute name, validated by semantic analysis
+    )),
+
+    // EXTRACT function has special syntax: EXTRACT(datetime_part FROM datetime_expression)
+    extract_function: $ => seq(
+      make_keyword('EXTRACT'),
+      '(',
+      $.identifier,  // datetime part (YEAR, MONTH, DAY, HOUR, MINUTE, SECOND, etc.)
+      make_keyword('FROM'),
+      $._expression,
+      ')'
     ),
 
     case_expression: $ => choice(

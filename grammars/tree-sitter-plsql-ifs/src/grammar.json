@@ -4149,10 +4149,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "extract_function"
-        },
-        {
-          "type": "SYMBOL",
           "name": "qualified_identifier"
         },
         {
@@ -4161,15 +4157,19 @@
         },
         {
           "type": "SYMBOL",
-          "name": "cursor_attribute"
-        },
-        {
-          "type": "SYMBOL",
           "name": "case_expression"
         },
         {
           "type": "SYMBOL",
           "name": "subquery"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "attribute_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "extract_function"
         },
         {
           "type": "SEQ",
@@ -4853,60 +4853,6 @@
         }
       ]
     },
-    "extract_function": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[eE][xX][tT][rR][aA][cC][tT]"
-        },
-        {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "PATTERN",
-              "value": "[yY][eE][aA][rR]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[mM][oO][nN][tT][hH]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[dD][aA][yY]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[hH][oO][uU][rR]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[mM][iI][nN][uU][tT][eE]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[sS][eE][cC][oO][nN][dD]"
-            }
-          ]
-        },
-        {
-          "type": "PATTERN",
-          "value": "[fF][rR][oO][mM]"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        }
-      ]
-    },
     "over_clause": {
       "type": "SEQ",
       "members": [
@@ -5016,37 +4962,53 @@
         }
       ]
     },
-    "cursor_attribute": {
+    "attribute_access": {
+      "type": "PREC",
+      "value": 8,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "qualified_identifier"
+          },
+          {
+            "type": "STRING",
+            "value": "%"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        ]
+      }
+    },
+    "extract_function": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "PATTERN",
+          "value": "[eE][xX][tT][rR][aA][cC][tT]"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
         {
           "type": "SYMBOL",
           "name": "identifier"
         },
         {
-          "type": "STRING",
-          "value": "%"
+          "type": "PATTERN",
+          "value": "[fF][rR][oO][mM]"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "PATTERN",
-              "value": "[fF][oO][uU][nN][dD]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[nN][oO][tT][fF][oO][uU][nN][dD]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[iI][sS][oO][pP][eE][nN]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[rR][oO][wW][cC][oO][uU][nN][tT]"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_expression"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },

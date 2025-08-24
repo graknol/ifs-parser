@@ -16,7 +16,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "generate": "tree-sitter generate"
+    "generate": "tree-sitter generate",
+    "full-codebase-test": "cd ../.. && cargo test test_full_ifs_codebase_parsing -- --nocapture"
   },
   "devDependencies": {
     "jest": "^30.0.5",

@@ -165,3 +165,6 @@ analysis/**/*.plsql
 analysis/**/*.storage
 analysis/**/*.enumeration
 analysis/**/*.txt
+
+*result*.csv
+*summary*.csv

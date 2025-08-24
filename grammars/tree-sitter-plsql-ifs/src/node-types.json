@@ -212,15 +212,15 @@
           "named": true
         },
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -275,15 +275,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -334,15 +334,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -390,6 +390,25 @@
     "fields": {}
   },
   {
+    "type": "attribute_access",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "basic_select_statement",
     "named": true,
     "fields": {},
@@ -398,15 +417,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -481,15 +500,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -564,15 +583,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -631,15 +650,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -765,6 +784,10 @@
           "named": true
         },
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -794,10 +817,6 @@
         },
         {
           "type": "continue_statement",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -940,15 +959,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -999,15 +1018,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -1066,15 +1085,15 @@
       "required": false,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -1122,21 +1141,6 @@
   },
   {
     "type": "current_of_clause",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "cursor_attribute",
     "named": true,
     "fields": {},
     "children": {
@@ -1350,15 +1354,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -1520,6 +1524,10 @@
           "named": true
         },
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1545,10 +1553,6 @@
         },
         {
           "type": "continue_statement",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -1800,15 +1804,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -1874,15 +1878,15 @@
       "required": false,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -1933,19 +1937,19 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "attribute_access",
+          "named": true
+        },
         {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -1958,6 +1962,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         },
         {
@@ -1996,15 +2004,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -2170,15 +2178,15 @@
       "required": false,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -2392,6 +2400,10 @@
           "named": true
         },
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -2417,10 +2429,6 @@
         },
         {
           "type": "continue_statement",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -2558,15 +2566,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -2629,15 +2637,15 @@
           "named": true
         },
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -2852,15 +2860,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -2915,15 +2923,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -2986,15 +2994,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -3058,15 +3066,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -3117,15 +3125,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -3180,15 +3188,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -3239,15 +3247,15 @@
       "required": false,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -3496,15 +3504,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -3578,15 +3586,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -3641,15 +3649,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -3816,15 +3824,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -3921,15 +3929,15 @@
       "required": false,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -3985,15 +3993,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -4068,6 +4076,10 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -4077,10 +4089,6 @@
         },
         {
           "type": "column_alias",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -4306,15 +4314,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -4419,15 +4427,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -4581,15 +4589,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -4678,15 +4686,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -4768,15 +4776,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -4842,15 +4850,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
         {
           "type": "case_expression",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -4913,6 +4921,10 @@
           "named": true
         },
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -4938,10 +4950,6 @@
         },
         {
           "type": "continue_statement",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -5056,6 +5064,10 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -5065,10 +5077,6 @@
         },
         {
           "type": "current_of_clause",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
@@ -5127,6 +5135,10 @@
           "named": true
         },
         {
+          "type": "attribute_access",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -5152,10 +5164,6 @@
         },
         {
           "type": "continue_statement",
-          "named": true
-        },
-        {
-          "type": "cursor_attribute",
           "named": true
         },
         {
