@@ -7,8 +7,8 @@ function parseSQL(sql) {
   const tempFile = path.join(__dirname, 'temp_test.plsql');
   try {
     fs.writeFileSync(tempFile, sql, 'utf-8');
-    const result = execSync(`tree-sitter parse "${tempFile}"`, {
-      cwd: __dirname,
+    const result = execSync(`npx tree-sitter parse "${tempFile}"`, {
+      cwd: path.join(__dirname, '..'),  // Run from grammar root
       encoding: 'utf-8',
       timeout: 5000
     });

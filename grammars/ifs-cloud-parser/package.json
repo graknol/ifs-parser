@@ -1,6 +1,6 @@
 {
   "name": "ifs-cloud-parser",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Tree-sitter grammar for IFS Cloud PL/SQL variant",
   "keywords": [
     "parser",
@@ -26,15 +26,13 @@
   "devDependencies": {
     "cross-env": "^10.0.0",
     "jest": "^30.0.5",
-    "tree-sitter-cli": "^0.20.0"
+    "tree-sitter-cli": "^0.25.8"
   },
   "tree-sitter": [
     {
-      "scope": "source.plsql.ifs",
+      "scope": "source.ifs.plsql",
       "file-types": [
-        "plsql",
-        "pks",
-        "pkb"
+        "plsql"
       ],
       "injection-regex": "plsql-ifs"
     }

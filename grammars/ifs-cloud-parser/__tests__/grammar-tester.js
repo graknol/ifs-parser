@@ -20,7 +20,7 @@ class GrammarTester {
 
     try {
       // Run tree-sitter parse
-      const output = execSync(`tree-sitter parse "${tempFile}"`, {
+      const output = execSync(`npx tree-sitter parse "${tempFile}"`, {
         cwd: path.resolve(__dirname, '..'),
         encoding: 'utf8',
         timeout: 5000
