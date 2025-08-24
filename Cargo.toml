@@ -1,0 +1,71 @@
+[package]
+name = "ifs-parser"
+version = "0.1.0"
+edition = "2021"
+authors = ["Sindre van der Linden"]
+description = "A fast parser for IFS Cloud source code supporting PL/SQL, XML entities/enumerations, SQL views, and Marble DSL"
+license = "MIT"
+repository = "https://github.com/graknol/ifs-parser"
+
+[workspace]
+members = [
+    ".",
+    "grammars/tree-sitter-plsql-ifs",
+    # "grammars/tree-sitter-entity",      # TODO: Add when ready
+    # "grammars/tree-sitter-enumeration", # TODO: Add when ready  
+    # "grammars/tree-sitter-views",       # TODO: Add when ready
+    # "grammars/tree-sitter-marble",      # TODO: Add when ready
+]
+
+[dependencies]
+# Tree-sitter for incremental parsing
+tree-sitter = "0.20"
+
+# Our custom grammars
+tree-sitter-plsql-ifs = { path = "grammars/tree-sitter-plsql-ifs" }
+
+# Core parsing dependencies
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Database for indexing
+rusqlite = { version = "0.31", features = ["bundled"] }
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Utilities
+rayon = "1.8"
+
+# Logging
+log = "0.4"
+env_logger = "0.10"
+chrono = { version = "0.4", features = ["serde"] }
+
+# File utilities
+pathdiff = "0.2"
+csv = "1.3"
+
+# CLI
+clap = { version = "4.4", features = ["derive"] }
+colored = "2.0"
+
+# Performance monitoring
+lazy_static = "1.4"
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+tempfile = "3.8"
+
+[[bench]]
+name = "parser_bench"
+harness = false
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.bench]
+debug = true
