@@ -209,12 +209,12 @@ function main() {
 
   if (args.length < 1) {
     console.log('Usage: node bisect.js <plsql-file> [grammar-path]');
-    console.log('Example: node bisect.js Project.plsql ../grammars/tree-sitter-plsql-ifs');
+    console.log('Example: node bisect.js Project.plsql ../grammars/ifs-cloud-parser');
     process.exit(1);
   }
 
   const filePath = args[0];
-  const grammarPath = args[1] || '../grammars/tree-sitter-plsql-ifs';
+  const grammarPath = args[1] || '../grammars/ifs-cloud-parser';
 
   if (!fs.existsSync(filePath)) {
     console.error(`File not found: ${filePath}`);

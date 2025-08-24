@@ -1,5 +1,5 @@
 [package]
-name = "tree-sitter-plsql-ifs"
+name = "ifs-cloud-parser"
 version = "0.1.0"
 edition = "2021"
 authors = ["Sindre van der Linden"]

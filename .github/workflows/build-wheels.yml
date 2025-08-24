@@ -24,21 +24,21 @@ jobs:
 
     - name: Generate grammar and run tests
       run: |
-        cd grammars/tree-sitter-plsql-ifs
+        cd grammars/ifs-cloud-parser
         npm install
         npm run generate
         npm test
 
     - name: Build source distribution (universal)
       run: |
-        cd grammars/tree-sitter-plsql-ifs
+        cd grammars/ifs-cloud-parser
         npm run package python
 
     - name: Upload source distribution
       uses: actions/upload-artifact@v4
       with:
         name: source-dist
-        path: grammars/tree-sitter-plsql-ifs/dist/*.tar.gz
+        path: grammars/ifs-cloud-parser/dist/*.tar.gz
 
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
@@ -62,21 +62,21 @@ jobs:
 
     - name: Generate grammar and run tests
       run: |
-        cd grammars/tree-sitter-plsql-ifs
+        cd grammars/ifs-cloud-parser
         npm install
         npm run generate
         npm test
 
     - name: Build Python wheel (platform-specific)
       run: |
-        cd grammars/tree-sitter-plsql-ifs
+        cd grammars/ifs-cloud-parser
         npm run package python
 
     - name: Upload wheels
       uses: actions/upload-artifact@v4
       with:
         name: wheels-${{ matrix.os }}
-        path: grammars/tree-sitter-plsql-ifs/dist/*.whl
+        path: grammars/ifs-cloud-parser/dist/*.whl
 
   upload_all:
     needs: [build_source, build_wheels]

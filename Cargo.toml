@@ -10,7 +10,7 @@ repository = "https://github.com/graknol/ifs-parser"
 [workspace]
 members = [
     ".",
-    "grammars/tree-sitter-plsql-ifs",
+    "grammars/ifs-cloud-parser",
     # "grammars/tree-sitter-entity",      # TODO: Add when ready
     # "grammars/tree-sitter-enumeration", # TODO: Add when ready  
     # "grammars/tree-sitter-views",       # TODO: Add when ready
@@ -22,7 +22,7 @@ members = [
 tree-sitter = "0.20"
 
 # Our custom grammars
-tree-sitter-plsql-ifs = { path = "grammars/tree-sitter-plsql-ifs" }
+ifs-cloud-parser = { path = "grammars/ifs-cloud-parser" }
 
 # Core parsing dependencies
 serde = { version = "1.0", features = ["derive"] }

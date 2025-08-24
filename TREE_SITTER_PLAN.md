@@ -4,65 +4,82 @@ This document outlines how to integrate tree-sitter parsers for IFS Cloud source
 
 ## Phase 1: Grammar Development
 
-### 1.1 PL/SQL Grammar (`tree-sitter-plsql-ifs`)
+### 1.1 PL/SQL Grammar (`ifs-cloud-parser`)
+
 ```javascript
 // grammar.js excerpt for IFS PL/SQL
 module.exports = grammar({
-  name: 'plsql_ifs',
-  
+  name: "plsql_ifs",
+
   rules: {
-    source_file: $ => repeat($._statement),
-    
-    _statement: $ => choice(
-      $.procedure_declaration,
-      $.function_declaration,
-      $.variable_declaration,
-      $.sql_statement,
-    ),
-    
+    source_file: ($) => repeat($._statement),
+
+    _statement: ($) =>
+      choice(
+        $.procedure_declaration,
+        $.function_declaration,
+        $.variable_declaration,
+        $.sql_statement
+      ),
+
     // IFS-specific visibility based on trailing underscores
-    procedure_declaration: $ => seq(
-      optional($.annotation), // @Override, @Overtake
-      'PROCEDURE',
-      $.identifier,
-      optional($.parameter_list),
-      'IS',
-      optional($.declaration_section),
-      'BEGIN',
-      repeat($._statement),
-      'END',
-      optional($.identifier),
-      ';'
-    ),
-    
+    procedure_declaration: ($) =>
+      seq(
+        optional($.annotation), // @Override, @Overtake
+        "PROCEDURE",
+        $.identifier,
+        optional($.parameter_list),
+        "IS",
+        optional($.declaration_section),
+        "BEGIN",
+        repeat($._statement),
+        "END",
+        optional($.identifier),
+        ";"
+      ),
+
     // IFS annotations
-    annotation: $ => choice(
-      '@Override',
-      '@Overtake', 
-      '@UncheckedAccess'
-    ),
-    
+    annotation: ($) => choice("@Override", "@Overtake", "@UncheckedAccess"),
+
     // IFS overtake directives
-    overtake_directive: $ => choice(
-      seq('$SEARCH', repeat($._statement), '$REPLACE', repeat($._statement), '$END'),
-      seq('$SEARCH', repeat($._statement), '$APPEND', repeat($._statement), '$END'),
-      seq('$PREPEND', repeat($._statement), '$SEARCH', repeat($._statement), '$END'),
-    ),
-    
+    overtake_directive: ($) =>
+      choice(
+        seq(
+          "$SEARCH",
+          repeat($._statement),
+          "$REPLACE",
+          repeat($._statement),
+          "$END"
+        ),
+        seq(
+          "$SEARCH",
+          repeat($._statement),
+          "$APPEND",
+          repeat($._statement),
+          "$END"
+        ),
+        seq(
+          "$PREPEND",
+          repeat($._statement),
+          "$SEARCH",
+          repeat($._statement),
+          "$END"
+        )
+      ),
+
     // SQL injection for embedded SQL
-    sql_statement: $ => choice(
-      $.select_statement,
-      $.cursor_declaration,
-      $.dml_statement
-    ),
-  }
+    sql_statement: ($) =>
+      choice($.select_statement, $.cursor_declaration, $.dml_statement),
+  },
 });
 ```
 
 ### 1.2 Entity Grammar (`tree-sitter-entity`)
+
 For XML-based entity definitions.
 
-### 1.3 Views Grammar (`tree-sitter-views`) 
+### 1.3 Views Grammar (`tree-sitter-views`)
+
 For SQL view definitions with IFS extensions.
 
 ## Phase 2: Integration Architecture
@@ -81,35 +98,35 @@ impl TreeSitterParser {
     pub fn new() -> Result<Self> {
         let mut parser = Parser::new();
         // We'll need to build and link the grammar libraries
-        parser.set_language(tree_sitter_plsql_ifs::language())?;
-        
+        parser.set_language(ifs_cloud_parser::language())?;
+
         Ok(Self {
             parser,
             trees: HashMap::new(),
             source_texts: HashMap::new(),
         })
     }
-    
+
     pub fn parse_incremental(&mut self, path: &Path, new_text: String, changes: &[InputEdit]) -> Result<AstNode> {
         let old_tree = self.trees.get(path);
-        
+
         // Apply edits to the old tree for incremental parsing
         if let Some(tree) = old_tree {
             for edit in changes {
                 tree.edit(edit);
             }
         }
-        
+
         // Parse with the old tree as context
         let new_tree = self.parser.parse(&new_text, old_tree)?;
-        
+
         // Convert tree-sitter CST to our AST
         let ast = self.convert_to_ast(new_tree.root_node(), &new_text)?;
-        
+
         // Cache the new tree
         self.trees.insert(path.to_path_buf(), new_tree);
         self.source_texts.insert(path.to_path_buf(), new_text);
-        
+
         Ok(ast)
     }
 }
@@ -118,9 +135,10 @@ impl TreeSitterParser {
 ## Phase 3: Grammar Compilation
 
 We'll need to create separate crates for each grammar:
+
 ```
 grammars/
-├── tree-sitter-plsql-ifs/
+├── ifs-cloud-parser/
 │   ├── Cargo.toml
 │   ├── grammar.js
 │   ├── src/
@@ -154,17 +172,17 @@ impl LanguageServer for IfsLanguageServer {
             .iter()
             .map(|change| InputEdit {
                 start_byte: change.range.start.into(),
-                old_end_byte: change.range.end.into(), 
+                old_end_byte: change.range.end.into(),
                 new_end_byte: (change.range.start + change.text.len()).into(),
                 start_position: change.range.start.into(),
                 old_end_position: change.range.end.into(),
                 new_end_position: Point::new(/* calculate from change.text */),
             })
             .collect();
-            
+
         // Incremental reparse - only changed regions
         let ast = self.parser.parse_incremental(&uri.to_file_path()?, new_text, &changes)?;
-        
+
         // Update index incrementally
         self.index.update_incremental(&uri, &ast, &changes).await?;
     }

@@ -6,7 +6,7 @@ set -e
 echo "Building tree-sitter grammars..."
 
 # Build PL/SQL grammar
-cd grammars/tree-sitter-plsql-ifs
+cd grammars/ifs-cloud-parser
 echo "Generating PL/SQL parser..."
 
 # Install tree-sitter CLI if not present

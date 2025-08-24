@@ -9,7 +9,7 @@ pub struct TreeSitterParser {
 impl TreeSitterParser {
     pub fn new() -> Result<Self> {
         let mut parser = Parser::new();
-        let language = tree_sitter_plsql_ifs::language();
+        let language = ifs_cloud_parser::language();
         parser.set_language(language)
             .map_err(|e| anyhow!("Failed to set language: {}", e))?;
         

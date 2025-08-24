@@ -9,7 +9,7 @@
 ```bash
 # 1. Clone and setup
 git clone <repository>
-cd ifs-parser/grammars/tree-sitter-plsql-ifs
+cd ifs-parser/grammars/ifs-cloud-parser
 
 # 2. Generate grammar
 npm run generate
@@ -33,7 +33,7 @@ That's it! 🎉
 
 ```
 dist/
-├── tree_sitter_plsql_ifs-0.1.0-py3-none-any.whl  # Ready to install
+├── ifs_cloud_parser-0.1.0-py3-none-any.whl  # Ready to install
 └── python/                                        # Source package
     ├── setup.py                                   # Build config
     ├── pyproject.toml                            # Modern Python config
@@ -46,16 +46,16 @@ dist/
 **Install anywhere:**
 
 ```bash
-pip install tree_sitter_plsql_ifs-0.1.0-py3-none-any.whl
+pip install ifs_cloud_parser-0.1.0-py3-none-any.whl
 ```
 
 **Use immediately:**
 
 ```python
-import tree_sitter_plsql_ifs
+import ifs_cloud_parser
 from tree_sitter import Language, Parser
 
-language = Language(tree_sitter_plsql_ifs.language())
+language = Language(ifs_cloud_parser.language())
 parser = Parser()
 parser.set_language(language)
 

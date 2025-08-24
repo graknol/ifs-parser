@@ -15,12 +15,14 @@ To build the tree-sitter grammars, you need:
 ### 1. Install Node.js
 
 **Ubuntu/Debian:**
+
 ```bash
 sudo apt update
 sudo apt install nodejs npm
 ```
 
 **macOS:**
+
 ```bash
 brew install node
 ```
@@ -42,8 +44,9 @@ make build-grammars
 ```
 
 Or manually:
+
 ```bash
-cd grammars/tree-sitter-plsql-ifs
+cd grammars/ifs-cloud-parser
 tree-sitter generate
 tree-sitter test  # Run tests
 ```
@@ -53,7 +56,7 @@ tree-sitter test  # Run tests
 The build system is set up with:
 
 - ✅ Workspace configuration (Cargo.toml)
-- ✅ Grammar structure (grammar.js)  
+- ✅ Grammar structure (grammar.js)
 - ✅ Build scripts and Makefile
 - ✅ Syntax highlighting queries
 - ✅ Test corpus
@@ -64,16 +67,16 @@ The build system is set up with:
 
 1. **Grammar Development**: Edit `grammar.js`
 2. **Generate Parser**: Run `tree-sitter generate`
-3. **Test Grammar**: Run `tree-sitter test`  
+3. **Test Grammar**: Run `tree-sitter test`
 4. **Build Rust**: Run `cargo build`
 5. **Integration Test**: Run `cargo test`
 
 ## Files Created
 
 ```
-grammars/tree-sitter-plsql-ifs/
+grammars/ifs-cloud-parser/
 ├── Cargo.toml           # Rust crate config
-├── package.json         # Node.js config  
+├── package.json         # Node.js config
 ├── grammar.js           # Grammar definition
 ├── build.rs             # Rust build script
 ├── src/

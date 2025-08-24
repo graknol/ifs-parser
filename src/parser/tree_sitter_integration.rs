@@ -1,7 +1,7 @@
 // Tree-sitter integration for IFS PL/SQL parsing
 
 use tree_sitter::{Language, Parser, Tree, Node};
-use tree_sitter_plsql_ifs::language;
+use ifs_cloud_parser::language;
 use crate::parser::ast::*;
 use anyhow::{Result, anyhow};
 use std::collections::HashMap;

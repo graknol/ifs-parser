@@ -7,7 +7,7 @@ fn main() {
         .include(&dir) // This includes src/ which contains our tree_sitter/parser.h
         .file(dir.join("parser.c"))
         .file(dir.join("scanner.c"))
-        .compile("tree-sitter-plsql-ifs");
+        .compile("ifs-cloud-parser");
 
     // Inform cargo to rerun if any of these files change
     println!("cargo:rerun-if-changed=src/parser.c");

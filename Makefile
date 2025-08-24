@@ -18,7 +18,7 @@ build-grammars:
 # Test tree-sitter grammars
 test-grammars: build-grammars
 	@echo "Testing tree-sitter grammars..."
-	@cd grammars/tree-sitter-plsql-ifs && tree-sitter test
+	@cd grammars/ifs-cloud-parser && tree-sitter test
 
 # Clean generated grammar files
 clean-grammars:

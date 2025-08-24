@@ -260,7 +260,7 @@ class CustomBuildExt(build_ext):
             elif self.plat_name == 'linux_aarch64':
                 self.plat_name = 'manylinux1_aarch64'
 
-tree_sitter_plsql_ifs = Extension(
+ifs_cloud_parser = Extension(
     'ifs_cloud_parser',
     sources=sources,
     include_dirs=[
@@ -272,7 +272,7 @@ tree_sitter_plsql_ifs = Extension(
 )
 
 setup(
-    ext_modules=[tree_sitter_plsql_ifs],
+    ext_modules=[ifs_cloud_parser],
     cmdclass={'build_ext': CustomBuildExt},
 )
 `;
@@ -313,7 +313,7 @@ Repository = "https://github.com/graknol/ifs-parser"
 // Forward declarations from tree-sitter
 extern "C" {
     typedef struct TSLanguage TSLanguage;
-    TSLanguage *tree_sitter_plsql_ifs();
+    TSLanguage *ifs_cloud_parser();
 }
 
 namespace py = pybind11;
@@ -322,7 +322,7 @@ PYBIND11_MODULE(ifs_cloud_parser, m) {
     m.doc() = "IFS Cloud PL/SQL Tree-sitter parser - 100% success rate on IFS Cloud codebase";
     
     m.def("language", []() -> void* {
-        return tree_sitter_plsql_ifs();
+        return ifs_cloud_parser();
     }, "Get the Tree-sitter Language object for IFS Cloud PL/SQL");
           
     // Add version info
@@ -581,7 +581,7 @@ function publishPython() {
     });
 
     console.log('  ✅ Successfully published to PyPI!');
-    console.log('  🌐 Install with: pip install tree-sitter-plsql-ifs');
+    console.log('  🌐 Install with: pip install ifs-cloud-parser');
 
   } catch (err) {
     console.log('  ⚠️  Upload failed. You can manually upload with:');
