@@ -77,7 +77,7 @@ function apply_type() {
 }
 
 module.exports = grammar({
-  name: 'plsql_ifs',
+  name: 'ifs_cloud_parser',
 
   word: $ => $.identifier,
 

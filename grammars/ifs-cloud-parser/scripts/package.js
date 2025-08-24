@@ -331,7 +331,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ifs-cloud-parser"
-version = "0.1.2"
+version = "0.1.3"
 description = "A parser for IFS Cloud source code, made with tree-sitter. Tested on the entire 25.1.0 code-base with 100% success rate. Native support for SQL included."
 license = "MIT"
 authors = [{name = "Sindre van der Linden", email = "sindre@apply.no"}]
@@ -373,7 +373,7 @@ extern "C" {
     #ifdef _WIN32
         __declspec(dllexport)
     #endif
-    TSLanguage *ifs_cloud_parser();
+    TSLanguage *tree_sitter_ifs_cloud_parser();
 }
 
 namespace py = pybind11;
@@ -382,11 +382,11 @@ PYBIND11_MODULE(ifs_cloud_parser, m) {
     m.doc() = "IFS Cloud PL/SQL Tree-sitter parser - 100% success rate on IFS Cloud codebase";
     
     m.def("language", []() -> void* {
-        return static_cast<void*>(ifs_cloud_parser());
+        return static_cast<void*>(tree_sitter_ifs_cloud_parser());
     }, "Get the Tree-sitter Language object for IFS Cloud PL/SQL");
           
     // Add version info
-    m.attr("__version__") = "0.1.2";
+    m.attr("__version__") = "0.1.3";
 }
 `;
 
@@ -411,7 +411,7 @@ Usage:
 
 from .ifs_cloud_parser import language
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __all__ = ["language"]
 `;
 
