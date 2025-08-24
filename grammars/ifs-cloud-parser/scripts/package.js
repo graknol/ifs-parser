@@ -285,7 +285,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ifs-cloud-parser"
 version = "0.1.0"
-description = "IFS Cloud PL/SQL parser for Tree-sitter - 100% success rate"
+description = "A parser for IFS Cloud source code, made with tree-sitter. Tested on the entire 25.1.0 code-base with 100% success rate. Native support for SQL included."
 license = "MIT"
 authors = [{name = "Sindre van der Linden", email = "sindre@apply.no"}]
 keywords = ["tree-sitter", "plsql", "ifs", "oracle", "parser"]
