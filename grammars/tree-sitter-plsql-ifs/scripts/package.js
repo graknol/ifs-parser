@@ -119,31 +119,38 @@ function buildPython() {
   // Create clean Python package structure
   createPythonPackage(outputDir);
 
-  // Build wheel in the output directory
-  console.log('  🔨 Building wheel...');
+  // Build wheel and source distribution
+  console.log('  🔨 Building wheel and source distribution...');
   try {
-    // Use virtual environment python if available
-    const pythonCmd = process.env.VENV_PYTHON || 'python3';
+    // Use virtual environment python if available, otherwise system python
+    const pythonCmd = process.env.VENV_PYTHON ? `"${process.env.VENV_PYTHON}"` : 'python3';
 
-    execSync(`${pythonCmd} -m build --wheel`, {
+    // Build both wheel and source distribution
+    execSync(`${pythonCmd} -m build`, {
       cwd: outputDir,
       stdio: 'inherit'
     });
 
-    // Move wheel to root of dist
-    const wheelDir = path.join(outputDir, 'dist');
-    if (fs.existsSync(wheelDir)) {
-      const wheels = fs.readdirSync(wheelDir).filter(f => f.endsWith('.whl'));
-      wheels.forEach(wheel => {
-        fs.renameSync(
-          path.join(wheelDir, wheel),
-          path.join(distDir, wheel)
-        );
+    // Move all built packages to root of dist
+    const buildDir = path.join(outputDir, 'dist');
+    if (fs.existsSync(buildDir)) {
+      const packages = fs.readdirSync(buildDir);
+      packages.forEach(pkg => {
+        const srcPath = path.join(buildDir, pkg);
+        const destPath = path.join(distDir, pkg);
+        fs.renameSync(srcPath, destPath);
+
+        if (pkg.endsWith('.whl')) {
+          console.log(`  📦 Created wheel: ${pkg} (platform-specific)`);
+        } else if (pkg.endsWith('.tar.gz')) {
+          console.log(`  📦 Created source: ${pkg} (universal - compiles on install)`);
+        }
       });
     }
   } catch (err) {
-    console.log('  ⚠️  Wheel build failed, creating source package...');
-    console.log('     Package is still usable - install with: pip install .')
+    console.log('  ⚠️  Build failed, but package structure is ready');
+    console.log('     You can still install with: pip install .');
+    console.log(`     From directory: ${outputDir}`);
   }
 }
 
@@ -186,11 +193,28 @@ function createPythonBindingFiles(outputDir) {
   const setupPy = `from setuptools import setup, Extension
 import pybind11
 import os
+import sys
 
 # Check for scanner.c
 sources = ['binding.cc', 'src/parser.c']
 if os.path.exists('src/scanner.c'):
     sources.append('src/scanner.c')
+
+# Suppress common tree-sitter warnings and the C++14 flag warning
+extra_compile_args = []
+if sys.platform != 'win32':
+    extra_compile_args = [
+        '-Wno-unused-but-set-variable',  # Suppresses: variable 'eof' set but not used
+        '-Wno-unused-variable',
+        '-Wno-unused-parameter',
+        '-w',  # Suppress the '-std=c++14' is valid for C++/ObjC++ but not for C warning
+    ]
+else:
+    # Windows MSVC
+    extra_compile_args = [
+        '/wd4101',  # unreferenced local variable
+        '/wd4189',  # local variable initialized but not referenced  
+    ]
 
 tree_sitter_plsql_ifs = Extension(
     'tree_sitter_plsql_ifs',
@@ -200,7 +224,7 @@ tree_sitter_plsql_ifs = Extension(
         'src',
     ],
     language='c++',
-    extra_compile_args=['-std=c++14'],
+    extra_compile_args=extra_compile_args,
 )
 
 setup(ext_modules=[tree_sitter_plsql_ifs])
@@ -323,80 +347,126 @@ print(tree.root_node.sexp())
 This parser handles all IFS Cloud PL/SQL variants and custom syntax.
 `;
 
+  // Create MANIFEST.in to ensure all files are included in source distribution
+  const manifestIn = `include README.md
+include pyproject.toml
+include setup.py
+include binding.cc
+include grammar.json
+include node-types.json
+recursive-include src *.c *.h
+global-exclude *.pyc
+global-exclude __pycache__
+`;
+
   // Write all files
   fs.writeFileSync(path.join(outputDir, 'setup.py'), setupPy);
   fs.writeFileSync(path.join(outputDir, 'pyproject.toml'), pyprojectToml);
   fs.writeFileSync(path.join(outputDir, 'binding.cc'), bindingCc);
   fs.writeFileSync(path.join(outputDir, '__init__.py'), initPy);
   fs.writeFileSync(path.join(outputDir, 'README.md'), readme);
+  fs.writeFileSync(path.join(outputDir, 'MANIFEST.in'), manifestIn);
 }
 
 function installPythonDeps() {
   console.log('  📥 Ensuring Python build dependencies...');
 
-  // Create a temporary virtual environment for building
+  // Check if build dependencies are already available
+  const packages = ['build', 'wheel', 'pybind11', 'tree-sitter', 'setuptools'];
+
+  // First try to use existing system packages
+  let hasAllPackages = true;
+  for (const pkg of packages) {
+    try {
+      execSync(`python3 -c "import ${pkg}"`, { stdio: 'pipe' });
+    } catch (err) {
+      hasAllPackages = false;
+      break;
+    }
+  }
+
+  if (hasAllPackages) {
+    console.log('  ✅ All build dependencies already available');
+    return;
+  }
+
+  // Try to create virtual environment with better error handling
   const venvDir = path.join(projectRoot, '.venv-build');
+  let useVenv = false;
 
   try {
-    // Create virtual environment
-    if (!fs.existsSync(venvDir)) {
-      console.log('  🏗️  Creating build virtual environment...');
-      execSync(`python3 -m venv ${venvDir}`, { stdio: 'pipe' });
+    // Check if python3-venv is available
+    execSync('python3 -m venv --help', { stdio: 'pipe' });
+
+    // Remove old venv if exists
+    if (fs.existsSync(venvDir)) {
+      fs.rmSync(venvDir, { recursive: true });
     }
 
-    // Use virtual environment pip
-    const venvPython = path.join(venvDir, 'bin', 'python');
-    const venvPip = path.join(venvDir, 'bin', 'pip');
+    console.log('  🏗️  Creating isolated build environment...');
+    execSync(`python3 -m venv "${venvDir}"`, { stdio: 'pipe' });
 
-    // Install required packages in virtual environment
-    const packages = ['build', 'wheel', 'pybind11', 'tree-sitter', 'setuptools'];
+    // Determine venv paths (cross-platform)
+    const isWindows = process.platform === 'win32';
+    const venvBin = isWindows ? path.join(venvDir, 'Scripts') : path.join(venvDir, 'bin');
+    const venvPython = path.join(venvBin, isWindows ? 'python.exe' : 'python');
+    const venvPip = path.join(venvBin, isWindows ? 'pip.exe' : 'pip');
 
-    console.log('  📦 Installing build dependencies in virtual environment...');
-    execSync(`${venvPip} install ${packages.join(' ')}`, {
-      stdio: 'pipe'
-    });
+    // Verify venv was created properly
+    if (!fs.existsSync(venvPython)) {
+      throw new Error('Virtual environment creation failed - python not found');
+    }
+
+    // Upgrade pip first
+    console.log('  📦 Installing build dependencies in isolated environment...');
+    execSync(`"${venvPython}" -m pip install --upgrade pip`, { stdio: 'pipe' });
+
+    // Install packages
+    execSync(`"${venvPip}" install ${packages.join(' ')}`, { stdio: 'pipe' });
 
     // Store venv info for later use
     process.env.VENV_PYTHON = venvPython;
     process.env.VENV_PIP = venvPip;
+    useVenv = true;
 
-  } catch (err) {
-    // Fallback: try system pip with user install
-    console.log('  ⚠️  Virtual environment failed, trying system pip...');
+    console.log('  ✅ Build environment ready');
 
-    let pipCmd = null;
-    const pipOptions = ['python3 -m pip', 'pip3', 'pip'];
+  } catch (venvErr) {
+    console.log('  ⚠️  Isolated environment failed, using system Python...');
 
-    for (const cmd of pipOptions) {
+    // Fallback to system pip - try different installation methods
+    let pipInstalled = false;
+    const installMethods = [
+      { cmd: 'python3 -m pip', args: ['install', '--user'] },
+      { cmd: 'pip3', args: ['install', '--user'] },
+      { cmd: 'python3 -m pip', args: ['install', '--break-system-packages'] },
+      { cmd: 'pip3', args: ['install', '--break-system-packages'] }
+    ];
+
+    for (const method of installMethods) {
       try {
-        execSync(`${cmd} --version`, { stdio: 'pipe' });
-        pipCmd = cmd;
-        break;
-      } catch (err) {
-        // Try next option
-      }
-    }
+        // Check if pip command exists
+        execSync(`${method.cmd} --version`, { stdio: 'pipe' });
 
-    if (!pipCmd) {
-      throw new Error('No pip found and virtual environment failed. Try: sudo apt install python3-pip python3-venv');
-    }
-
-    // Install with --break-system-packages if needed
-    const packages = ['build', 'wheel', 'pybind11', 'tree-sitter', 'setuptools'];
-
-    try {
-      execSync(`${pipCmd} install --user ${packages.join(' ')}`, {
-        stdio: 'pipe'
-      });
-    } catch (userErr) {
-      try {
-        console.log('  ⚠️  Trying with --break-system-packages...');
-        execSync(`${pipCmd} install --break-system-packages ${packages.join(' ')}`, {
+        console.log(`  📦 Installing with: ${method.cmd} ${method.args.join(' ')}...`);
+        execSync(`${method.cmd} ${method.args.join(' ')} ${packages.join(' ')}`, {
           stdio: 'pipe'
         });
-      } catch (systemErr) {
-        console.log(`  ⚠️  Install manually: ${pipCmd} install --user ${packages.join(' ')}`);
+
+        pipInstalled = true;
+        break;
+      } catch (methodErr) {
+        // Continue to next method
+        continue;
       }
+    }
+
+    if (!pipInstalled) {
+      console.log('  ❌ Could not install build dependencies automatically.');
+      console.log('  💡 Please install manually:');
+      console.log(`     python3 -m pip install --user ${packages.join(' ')}`);
+      console.log('     or: sudo apt install python3-pip python3-venv');
+      throw new Error('Failed to install Python build dependencies');
     }
   }
 }

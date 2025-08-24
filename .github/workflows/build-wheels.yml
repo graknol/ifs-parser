@@ -1,0 +1,108 @@
+name: Build Python Wheels
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  build_source:
+    name: Build source distribution
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Generate grammar and run tests
+      run: |
+        cd grammars/tree-sitter-plsql-ifs
+        npm install
+        npm run generate
+        npm test
+
+    - name: Build source distribution (universal)
+      run: |
+        cd grammars/tree-sitter-plsql-ifs
+        npm run package python
+
+    - name: Upload source distribution
+      uses: actions/upload-artifact@v4
+      with:
+        name: source-dist
+        path: grammars/tree-sitter-plsql-ifs/dist/*.tar.gz
+
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Generate grammar and run tests
+      run: |
+        cd grammars/tree-sitter-plsql-ifs
+        npm install
+        npm run generate
+        npm test
+
+    - name: Build Python wheel (platform-specific)
+      run: |
+        cd grammars/tree-sitter-plsql-ifs
+        npm run package python
+
+    - name: Upload wheels
+      uses: actions/upload-artifact@v4
+      with:
+        name: wheels-${{ matrix.os }}
+        path: grammars/tree-sitter-plsql-ifs/dist/*.whl
+
+  upload_all:
+    needs: [build_source, build_wheels]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        pattern: '*'
+        merge-multiple: true
+        path: dist/
+
+    - name: List all packages
+      run: |
+        echo "📦 Built packages:"
+        ls -la dist/
+        echo ""
+        echo "🔄 Source distributions (universal):"
+        ls -la dist/*.tar.gz || echo "No source dists"
+        echo ""
+        echo "⚙️  Binary wheels (platform-specific):"
+        ls -la dist/*.whl || echo "No wheels"
+
+    # Optional: Upload to PyPI
+    # - name: Publish to PyPI
+    #   uses: pypa/gh-action-pypi-publish@release/v1
+    #   with:
+    #     user: __token__
+    #     password: ${{ secrets.PYPI_API_TOKEN }}
+    #     packages_dir: dist/

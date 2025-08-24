@@ -162,6 +162,11 @@ yarn.lock
 analysis/sensitive/
 analysis/proprietary/
 
+# Cleanup artifacts - directories that may be created during build/analysis
+AS/
+Support/
+Language/
+
 # Generated parser outputs
 parsed_output/
 ast_dumps/
