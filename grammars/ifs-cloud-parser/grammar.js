@@ -139,13 +139,13 @@ module.exports = grammar({
     procedure_declaration: $ => seq(
       repeat($.annotation),  // Optional annotations before procedure
       make_keyword('PROCEDURE'),
-      $.identifier,
-      optional($.parameter_list),
+      field('name', $.identifier),
+      optional(field('parameters', $.parameter_list)),
       make_keyword('IS'),
-      repeat($._declaration),
+      optional(field('declarations', repeat($._declaration))),
       make_keyword('BEGIN'),
-      repeat($.annotated_statement),
-      optional($.exception_section),
+      field('body', repeat($._statement_with_annotations)),
+      optional(field('exception_handler', $.exception_section)),
       make_keyword('END'),
       optional($.identifier),
       ';'
@@ -155,15 +155,15 @@ module.exports = grammar({
     function_declaration: $ => seq(
       repeat($.annotation),  // Optional annotations before function
       make_keyword('FUNCTION'),
-      $.identifier,
-      optional($.parameter_list),
+      field('name', $.identifier),
+      optional(field('parameters', $.parameter_list)),
       make_keyword('RETURN'),
-      $.data_type,
+      field('return_type', $.data_type),
       make_keyword('IS'),
-      repeat($._declaration),
+      optional(field('declarations', repeat($._declaration))),
       make_keyword('BEGIN'),
-      repeat($.annotated_statement),
-      optional($.exception_section),
+      field('body', repeat($._statement_with_annotations)),
+      optional(field('exception_handler', $.exception_section)),
       make_keyword('END'),
       optional($.identifier),
       ';'
@@ -190,7 +190,7 @@ module.exports = grammar({
       repeat(choice($.procedure_declaration, $.function_declaration)),
       optional(seq(
         make_keyword('BEGIN'),
-        repeat($._statement),
+        repeat($._statement_with_annotations),
         optional($.exception_section)
       )),
       make_keyword('END'),
@@ -202,20 +202,20 @@ module.exports = grammar({
     parameter_list: $ => paren_list($.parameter_declaration),
 
     parameter_declaration: $ => seq(
-      $.identifier,
-      optional(choice(
+      field('name', $.identifier),
+      optional(field('direction', choice(
         make_keyword('IN'),
         make_keyword('OUT'),
         seq(make_keyword('IN'), make_keyword('OUT')),
         seq(make_keyword('IN'), make_keyword('OUT'), make_keyword('NOCOPY')),
         seq(make_keyword('IN'), make_keyword('NOCOPY')),
         seq(make_keyword('OUT'), make_keyword('NOCOPY'))
-      )),
-      $.data_type,
-      optional(choice(
+      ))),
+      field('type', $.data_type),
+      optional(field('default_value', choice(
         seq(make_keyword('DEFAULT'), $._expression),
         seq(':=', $._expression)
-      ))
+      )))
     ),
 
     // Declarations
@@ -232,18 +232,18 @@ module.exports = grammar({
     ),
 
     variable_declaration: $ => seq(
-      $.identifier,
-      $.data_type,
-      optional(seq(':=', $._expression)),
+      field('name', $.identifier),
+      field('type', $.data_type),
+      optional(field('default_value', seq(':=', $._expression))),
       ';'
     ),
 
     constant_declaration: $ => seq(
-      $.identifier,
+      field('name', $.identifier),
       make_keyword('CONSTANT'),
-      $.data_type,
+      field('type', $.data_type),
       ':=',
-      $._expression,
+      field('value', $._expression),
       ';'
     ),
 
@@ -359,29 +359,33 @@ module.exports = grammar({
     ),
 
     // Annotated statement allows annotations before any statement
-    annotated_statement: $ => seq(
-      repeat($.annotation),
+    // Hidden rule to reduce AST nesting - users see the statement directly with annotations as properties
+    _statement_with_annotations: $ => seq(
+      repeat(field('annotations', $.annotation)),
       $._statement
     ),
 
+    // Keep the old rule for backward compatibility where needed
+    annotated_statement: $ => $._statement_with_annotations,
+
     assignment_statement: $ => seq(
-      choice(
+      field('target', choice(
         $.member_access,
         $.qualified_identifier,
         $.function_call  // This handles array element access like arr(index)
-      ),
+      )),
       ':=',
-      $._expression,
+      field('value', $._expression),
       ';'
     ),
 
     if_statement: $ => prec.right(seq(
       make_keyword('IF'),
-      $._expression,
+      field('condition', $._expression),
       make_keyword('THEN'),
-      repeat($._statement),
-      repeat($.elsif_clause),
-      optional($.else_clause),
+      field('then_body', repeat($._statement_with_annotations)),
+      repeat(field('elsif_clauses', $.elsif_clause)),
+      optional(field('else_clause', $.else_clause)),
       make_keyword('END'),
       make_keyword('IF'),
       ';'
@@ -389,20 +393,20 @@ module.exports = grammar({
 
     elsif_clause: $ => seq(
       make_keyword('ELSIF'),
-      $._expression,
+      field('condition', $._expression),
       make_keyword('THEN'),
-      repeat($._statement)
+      field('body', repeat($._statement_with_annotations))
     ),
 
     else_clause: $ => seq(
       make_keyword('ELSE'),
-      repeat($._statement)
+      field('body', repeat($._statement_with_annotations))
     ),
 
     loop_statement: $ => seq(
-      optional(seq($.identifier, ':')),
+      optional(field('label', seq($.identifier, ':'))),
       make_keyword('LOOP'),
-      repeat($._statement),
+      field('body', repeat($._statement_with_annotations)),
       make_keyword('END'),
       make_keyword('LOOP'),
       optional($.identifier),
@@ -410,11 +414,11 @@ module.exports = grammar({
     ),
 
     while_loop_statement: $ => seq(
-      optional(seq($.identifier, ':')),
+      optional(field('label', seq($.identifier, ':'))),
       make_keyword('WHILE'),
-      $._expression,
+      field('condition', $._expression),
       make_keyword('LOOP'),
-      repeat($._statement),
+      field('body', repeat($._statement_with_annotations)),
       make_keyword('END'),
       make_keyword('LOOP'),
       optional($.identifier),
@@ -422,17 +426,17 @@ module.exports = grammar({
     ),
 
     for_loop_statement: $ => seq(
-      optional(seq($.identifier, ':')),
+      optional(field('label', seq($.identifier, ':'))),
       make_keyword('FOR'),
-      $.identifier,
+      field('loop_variable', $.identifier),
       make_keyword('IN'),
       optional(make_keyword('REVERSE')),
-      choice(
+      field('range', choice(
         $.cursor_for_loop_range,
         $.numeric_for_loop_range
-      ),
+      )),
       make_keyword('LOOP'),
-      repeat($._statement),
+      field('body', repeat($._statement_with_annotations)),
       make_keyword('END'),
       make_keyword('LOOP'),
       optional($.identifier),
@@ -527,12 +531,12 @@ module.exports = grammar({
 
     exception_handler: $ => seq(
       make_keyword('WHEN'),
-      choice(
+      field('exception_name', choice(
         $.identifier,
         make_keyword('OTHERS')
-      ),
+      )),
       make_keyword('THEN'),
-      repeat($._statement)
+      field('handler_body', repeat($._statement_with_annotations))
     ),
 
     // SQL Statements
@@ -993,14 +997,14 @@ module.exports = grammar({
     // PL/SQL CASE statement clauses
     when_statement_clause: $ => seq(
       make_keyword('WHEN'),
-      $._expression,
+      field('condition', $._expression),
       make_keyword('THEN'),
-      repeat($._statement)
+      field('body', repeat($._statement_with_annotations))
     ),
 
     else_statement_clause: $ => seq(
       make_keyword('ELSE'),
-      repeat($._statement)
+      field('body', repeat($._statement_with_annotations))
     ),
 
     // EXECUTE IMMEDIATE statement for dynamic SQL

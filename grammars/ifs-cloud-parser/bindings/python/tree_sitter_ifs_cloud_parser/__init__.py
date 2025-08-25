@@ -41,4 +41,4 @@ def __dir__():
         "__loader__", "__name__", "__package__", "__path__", "__spec__",
     ])
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"

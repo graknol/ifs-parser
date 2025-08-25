@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ifs-cloud-parser"
 description = "Parses the IFS Cloud source code, including nested SQL support."
-version = "0.3.0"
+version = "0.4.0"
 keywords = ["incremental", "parsing", "tree-sitter", "ifs-cloud-parser"]
 classifiers = [
   "Intended Audience :: Developers",
