@@ -206,4 +206,4 @@ self.register(Rule {
 
 ## License
 
-This project is licensed under MIT License ([LICENSE-MIT](LICENSE-MIT))
+This project is licensed under MIT License ([LICENSE](LICENSE))
